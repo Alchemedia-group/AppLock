@@ -37,6 +37,7 @@ class SettingsRepository(private val context: Context) {
         val HIDE_NOTIFICATIONS = booleanPreferencesKey("hide_notifications")
         val AUTO_DELETE_DAYS = intPreferencesKey("auto_delete_days")
         val PRO_UNLOCKED = booleanPreferencesKey("pro_unlocked")
+        val ACCESSIBILITY_CONSENT = booleanPreferencesKey("accessibility_consent")
     }
 
     val settings: Flow<AppSettings> = context.settingsStore.data.map { it.toSettings() }
@@ -89,6 +90,7 @@ class SettingsRepository(private val context: Context) {
     suspend fun setShuffleKeypad(value: Boolean) = update { it[Keys.SHUFFLE] = value }
     suspend fun setFakeCrash(value: Boolean) = update { it[Keys.FAKE_CRASH] = value }
     suspend fun setHideNotifications(value: Boolean) = update { it[Keys.HIDE_NOTIFICATIONS] = value }
+    suspend fun setAccessibilityConsent(value: Boolean) = update { it[Keys.ACCESSIBILITY_CONSENT] = value }
     suspend fun setProUnlocked(value: Boolean) = update { it[Keys.PRO_UNLOCKED] = value }
     suspend fun setAutoDeleteDays(value: Int) = update { it[Keys.AUTO_DELETE_DAYS] = value.coerceAtLeast(0) }
 
@@ -113,6 +115,7 @@ class SettingsRepository(private val context: Context) {
         hideNotifications = this[Keys.HIDE_NOTIFICATIONS] ?: false,
         autoDeleteDays = this[Keys.AUTO_DELETE_DAYS] ?: 0,
         proUnlocked = this[Keys.PRO_UNLOCKED] ?: false,
+        accessibilityConsent = this[Keys.ACCESSIBILITY_CONSENT] ?: false,
     )
 
     private inline fun <reified E : Enum<E>> enumOrDefault(name: String?, default: E): E =

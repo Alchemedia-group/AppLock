@@ -247,4 +247,11 @@
     <string name="lang_pl" translatable="false">Polski</string>
     <string name="language_choose_title">Choose your language</string>
     <string name="language_choose_body">You can change this later in Settings.</string>
+    <string name="disclosure_title">AppLock needs Accessibility access</string>
+    <string name="disclosure_intro">AppLock uses Android\'s Accessibility Service for one purpose only: to detect which app has just opened, so it can show your PIN or pattern screen over the apps you chose to protect.</string>
+    <string name="disclosure_point_read">It does not read, record or collect anything on your screen: no text, passwords, messages or contacts.</string>
+    <string name="disclosure_point_share">It does not share any data. Your PIN, photos and app list stay on this device.</string>
+    <string name="disclosure_point_off">You can turn it off any time in Android Settings. Protection then stops.</string>
+    <string name="disclosure_agree">Agree and continue</string>
+    <string name="disclosure_decline">No thanks</string>
 </resources>

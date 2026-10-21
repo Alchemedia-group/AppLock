@@ -25,4 +25,6 @@ data class AppSettings(
     val autoDeleteDays: Int = 0,
     /** True once the one-time Pro purchase has been verified with Google Play. */
     val proUnlocked: Boolean = false,
+    /** True once the user has agreed to the accessibility disclosure. */
+    val accessibilityConsent: Boolean = false,
 )

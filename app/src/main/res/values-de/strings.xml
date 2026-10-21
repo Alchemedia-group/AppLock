@@ -202,4 +202,11 @@
     </plurals>
     <string name="language_choose_title">Wähle deine Sprache</string>
     <string name="language_choose_body">Du kannst das später in den Einstellungen ändern.</string>
+    <string name="disclosure_title">AppLock braucht Zugriff auf die Bedienungshilfen</string>
+    <string name="disclosure_intro">AppLock nutzt den Bedienungshilfen-Dienst von Android nur zu einem Zweck: zu erkennen, welche App gerade geöffnet wurde, um deine PIN- oder Muster-Abfrage über den von dir geschützten Apps anzuzeigen.</string>
+    <string name="disclosure_point_read">Er liest, speichert oder sammelt nichts von deinem Bildschirm: keine Texte, Passwörter, Nachrichten oder Kontakte.</string>
+    <string name="disclosure_point_share">Er gibt keine Daten weiter. Deine PIN, Fotos und App-Liste bleiben auf diesem Gerät.</string>
+    <string name="disclosure_point_off">Du kannst ihn jederzeit in den Android-Einstellungen ausschalten. Dann endet der Schutz.</string>
+    <string name="disclosure_agree">Zustimmen und weiter</string>
+    <string name="disclosure_decline">Nein danke</string>
 </resources>

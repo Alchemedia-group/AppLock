@@ -48,6 +48,14 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    /** True while the accessibility disclosure screen should be on top of everything. */
+    var accessibilityDisclosurePending by mutableStateOf(false)
+
+    fun agreeToAccessibilityDisclosure() {
+        accessibilityDisclosurePending = false
+        viewModelScope.launch { repository.setAccessibilityConsent(true) }
+    }
+
     private val billing = appLock.billingManager
     val billingState = billing.state
 

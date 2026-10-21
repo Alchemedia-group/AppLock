@@ -25,6 +25,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -52,10 +55,22 @@ fun rememberSetupStatus(): State<SetupStatus> {
     return status
 }
 
+/**
+ * Returns the action for "open Accessibility settings". Until the user has agreed to the prominent
+ * disclosure it shows that screen first, as Google Play requires for accessibility services.
+ */
 @Composable
 fun openAccessibilitySettings(): () -> Unit {
     val context = LocalContext.current
-    return { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }
+    val viewModel: MainViewModel = viewModel()
+    val settings by viewModel.settings.collectAsState()
+    return {
+        if (settings?.accessibilityConsent == true) {
+            context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+        } else {
+            viewModel.accessibilityDisclosurePending = true
+        }
+    }
 }
 
 /** Asks for POST_NOTIFICATIONS where needed, then sends the user to the notification-access screen. */

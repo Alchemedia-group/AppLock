@@ -206,4 +206,11 @@
     </plurals>
     <string name="language_choose_title">Wybierz język</string>
     <string name="language_choose_body">Możesz to zmienić później w Ustawieniach.</string>
+    <string name="disclosure_title">AppLock potrzebuje dostępu do ułatwień dostępu</string>
+    <string name="disclosure_intro">AppLock używa usługi ułatwień dostępu Androida w jednym celu: aby wykryć, która aplikacja została właśnie otwarta, i pokazać ekran PIN-u lub wzoru nad aplikacjami, które wybrałeś do ochrony.</string>
+    <string name="disclosure_point_read">Nie odczytuje, nie nagrywa i nie zbiera niczego z Twojego ekranu: ani tekstu, ani haseł, ani wiadomości, ani kontaktów.</string>
+    <string name="disclosure_point_share">Nie udostępnia żadnych danych. Twój PIN, zdjęcia i lista aplikacji pozostają na tym urządzeniu.</string>
+    <string name="disclosure_point_off">Możesz ją wyłączyć w dowolnej chwili w ustawieniach Androida. Ochrona wtedy przestaje działać.</string>
+    <string name="disclosure_agree">Zgadzam się i kontynuuję</string>
+    <string name="disclosure_decline">Nie, dziękuję</string>
 </resources>

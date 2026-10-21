@@ -204,4 +204,11 @@
     </plurals>
     <string name="language_choose_title">Scegli la tua lingua</string>
     <string name="language_choose_body">Potrai cambiarla più tardi nelle impostazioni.</string>
+    <string name="disclosure_title">AppLock ha bisogno dell’accesso Accessibilità</string>
+    <string name="disclosure_intro">AppLock usa il servizio di accessibilità di Android per un solo scopo: rilevare quale app si è appena aperta, così da mostrare la schermata del PIN o della sequenza sopra le app che hai scelto di proteggere.</string>
+    <string name="disclosure_point_read">Non legge, registra né raccoglie nulla del tuo schermo: né testo, né password, né messaggi, né contatti.</string>
+    <string name="disclosure_point_share">Non condivide alcun dato. PIN, foto ed elenco delle app restano su questo dispositivo.</string>
+    <string name="disclosure_point_off">Puoi disattivarlo in qualsiasi momento dalle impostazioni di Android. La protezione si interrompe.</string>
+    <string name="disclosure_agree">Accetta e continua</string>
+    <string name="disclosure_decline">No, grazie</string>
 </resources>

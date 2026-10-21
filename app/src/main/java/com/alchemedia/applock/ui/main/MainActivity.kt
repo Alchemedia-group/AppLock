@@ -1,6 +1,8 @@
 package com.alchemedia.applock.ui.main
 
 import android.content.Context
+import android.content.Intent
+import android.provider.Settings
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.compose.setContent
@@ -76,6 +78,13 @@ class MainActivity : FragmentActivity() {
                             recreate()
                         })
                         current == null -> Unit
+                        mainViewModel.accessibilityDisclosurePending -> AccessibilityDisclosureScreen(
+                            onAgree = {
+                                mainViewModel.agreeToAccessibilityDisclosure()
+                                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                            },
+                            onDecline = { mainViewModel.accessibilityDisclosurePending = false },
+                        )
                         !current.setupComplete -> OnboardingFlow(mainViewModel)
                         !mainViewModel.authenticated && recovering -> RecoveryFlow(
                             viewModel = mainViewModel,
