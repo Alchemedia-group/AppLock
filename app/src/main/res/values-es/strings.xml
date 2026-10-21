@@ -43,7 +43,6 @@
     <string name="failed_unlock">Desbloqueo fallido</string>
     <string name="search_apps">Buscar apps</string>
     <string name="apps_empty">No se encontraron apps</string>
-    <string name="permission_accessibility_body">AppLock necesita su servicio de accesibilidad para detectar cuándo se abre una app protegida. Si el interruptor está en gris, abre la información de la app de AppLock, toca ⋮ y elige «Permitir ajustes restringidos».</string>
     <string name="permission_accessibility_action">Abrir ajustes</string>
     <string name="permission_camera_title">Permitir la cámara para las fotos de intrusos</string>
     <string name="permission_camera_body">AppLock toma una foto discreta con la cámara frontal cuando alguien falla al desbloquear.</string>

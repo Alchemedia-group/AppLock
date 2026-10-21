@@ -43,7 +43,6 @@
     <string name="failed_unlock">Desbloqueio falhado</string>
     <string name="search_apps">Pesquisar apps</string>
     <string name="apps_empty">Nenhuma app encontrada</string>
-    <string name="permission_accessibility_body">O AppLock precisa do seu serviço de acessibilidade para detetar quando uma app protegida é aberta. Se o interruptor estiver cinzento, abre as informações da app do AppLock, toca em ⋮ e escolhe «Permitir configurações restritas».</string>
     <string name="permission_accessibility_action">Abrir definições</string>
     <string name="permission_camera_title">Permitir a câmara para fotos de intrusos</string>
     <string name="permission_camera_body">O AppLock tira discretamente uma foto com a câmara frontal quando alguém falha o desbloqueio.</string>

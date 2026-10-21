@@ -43,7 +43,6 @@
     <string name="failed_unlock">Échec du déverrouillage</string>
     <string name="search_apps">Rechercher une appli</string>
     <string name="apps_empty">Aucune appli trouvée</string>
-    <string name="permission_accessibility_body">AppLock a besoin de son service d’accessibilité pour détecter l’ouverture d’une appli protégée. Si le bouton est grisé, ouvre les infos de l’appli AppLock, touche ⋮ et choisis « Autoriser les paramètres soumis à restrictions ».</string>
     <string name="permission_accessibility_action">Ouvrir les réglages</string>
     <string name="permission_camera_title">Autoriser l’appareil photo pour les photos d’intrus</string>
     <string name="permission_camera_body">AppLock prend discrètement une photo avec la caméra frontale quand quelqu’un échoue à déverrouiller.</string>

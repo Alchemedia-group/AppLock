@@ -43,7 +43,6 @@
     <string name="failed_unlock">Entsperren fehlgeschlagen</string>
     <string name="search_apps">Apps suchen</string>
     <string name="apps_empty">Keine Apps gefunden</string>
-    <string name="permission_accessibility_body">AppLock braucht seinen Bedienungshilfen-Dienst, um zu erkennen, wann eine geschützte App geöffnet wird. Wenn der Schalter ausgegraut ist, öffne die App-Info von AppLock, tippe auf ⋮ und wähle „Eingeschränkte Einstellungen zulassen“.</string>
     <string name="permission_accessibility_action">Einstellungen öffnen</string>
     <string name="permission_camera_title">Kamera für Eindringlingsfotos erlauben</string>
     <string name="permission_camera_body">AppLock macht unauffällig ein Foto mit der Frontkamera, wenn jemand beim Entsperren scheitert.</string>

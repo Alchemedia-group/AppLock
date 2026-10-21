@@ -43,7 +43,6 @@
     <string name="failed_unlock">Nieudane odblokowanie</string>
     <string name="search_apps">Szukaj aplikacji</string>
     <string name="apps_empty">Nie znaleziono aplikacji</string>
-    <string name="permission_accessibility_body">AppLock potrzebuje usługi ułatwień dostępu, aby wykrywać otwarcie chronionej aplikacji. Jeśli przełącznik jest wyszarzony, otwórz informacje o aplikacji AppLock, dotknij ⋮ i wybierz „Zezwól na ustawienia z ograniczeniami”.</string>
     <string name="permission_accessibility_action">Otwórz ustawienia</string>
     <string name="permission_camera_title">Zezwól na aparat do zdjęć intruzów</string>
     <string name="permission_camera_body">AppLock dyskretnie robi zdjęcie przednim aparatem, gdy ktoś nie zdoła odblokować.</string>

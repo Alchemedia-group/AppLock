@@ -43,7 +43,6 @@
     <string name="failed_unlock">Sblocco fallito</string>
     <string name="search_apps">Cerca app</string>
     <string name="apps_empty">Nessuna app trovata</string>
-    <string name="permission_accessibility_body">AppLock ha bisogno del suo servizio di accessibilità per rilevare quando si apre un’app protetta. Se l’interruttore è disattivato, apri le informazioni dell’app AppLock, tocca ⋮ e scegli «Consenti impostazioni con restrizioni».</string>
     <string name="permission_accessibility_action">Apri impostazioni</string>
     <string name="permission_camera_title">Consenti la fotocamera per le foto degli intrusi</string>
     <string name="permission_camera_body">AppLock scatta in modo discreto una foto con la fotocamera frontale quando qualcuno sbaglia lo sblocco.</string>

@@ -63,7 +63,6 @@
     <!-- Apps tab -->
     <string name="search_apps">Search apps</string>
     <string name="apps_empty">No apps found</string>
-    <string name="permission_accessibility_body">AppLock needs its accessibility service to detect when a protected app opens. If the switch is greyed out, open AppLock\'s App info, tap ⋮ and choose "Allow restricted settings".</string>
     <string name="permission_accessibility_action">Open settings</string>
     <string name="permission_camera_title">Allow camera for intruder photos</string>
     <string name="permission_camera_body">AppLock quietly takes a photo with the front camera when someone fails to unlock.</string>
