@@ -12,16 +12,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Surface
+import androidx.compose.ui.res.painterResource
+import com.alchemedia.applock.ui.components.IconTile
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -59,6 +67,7 @@ fun IntrudersTab(
     var open by remember { mutableStateOf<IntruderShot?>(null) }
     var confirmDeleteAll by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val colors = MaterialTheme.colorScheme
 
     fun labelFor(shot: IntruderShot): String {
         val pkg = shot.packageName ?: return context.getString(R.string.intruder_unknown_app)
@@ -72,50 +81,96 @@ fun IntrudersTab(
 
     Box(modifier.fillMaxSize()) {
         if (shots.isEmpty()) {
-            Text(
-                stringResource(R.string.intruders_empty),
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.align(Alignment.Center).padding(32.dp),
-            )
+            Column(
+                Modifier
+                    .align(Alignment.Center)
+                    .padding(40.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                IconTile(
+                    painterResource(R.drawable.ic_camera),
+                    size = 72.dp,
+                )
+                Spacer(Modifier.height(20.dp))
+                Text(
+                    stringResource(R.string.intruders_empty),
+                    textAlign = TextAlign.Center,
+                    color = colors.onSurfaceVariant,
+                )
+            }
         } else {
-            Column(Modifier.fillMaxSize()) {
-                Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), horizontalArrangement = Arrangement.End) {
-                    TextButton(onClick = {
-                        if (confirmDeleteAll) {
-                            confirmDeleteAll = false
-                            onDeleteAll()
-                        } else {
-                            confirmDeleteAll = true
+            LazyColumn(
+                contentPadding = PaddingValues(top = 4.dp, bottom = 112.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                item {
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
+                        shape = MaterialTheme.shapes.large,
+                        color = colors.errorContainer,
+                    ) {
+                        Row(Modifier.padding(start = 20.dp, end = 8.dp, top = 8.dp, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                stringResource(R.string.intruders_summary, shots.size),
+                                style = MaterialTheme.typography.titleMedium,
+                                color = colors.onErrorContainer,
+                                modifier = Modifier.weight(1f),
+                            )
+                            TextButton(onClick = {
+                                if (confirmDeleteAll) {
+                                    confirmDeleteAll = false
+                                    onDeleteAll()
+                                } else {
+                                    confirmDeleteAll = true
+                                }
+                            }) {
+                                Text(
+                                    stringResource(
+                                        if (confirmDeleteAll) R.string.intruder_delete_all_confirm else R.string.intruder_delete_all,
+                                    ),
+                                    color = colors.onErrorContainer,
+                                )
+                            }
                         }
-                    }) {
-                        Text(
-                            stringResource(
-                                if (confirmDeleteAll) R.string.intruder_delete_all_confirm else R.string.intruder_delete_all,
-                            ),
-                            color = MaterialTheme.colorScheme.tertiary,
-                        )
                     }
                 }
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(140.dp),
-                    contentPadding = androidx.compose.foundation.layout.PaddingValues(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    items(shots, key = { it.file.name }) { shot ->
-                        Column(Modifier.clickable { open = shot }) {
+                items(shots, key = { it.file.name }) { shot ->
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .clickable { open = shot },
+                        shape = MaterialTheme.shapes.large,
+                        color = colors.surfaceContainer,
+                    ) {
+                        Row(Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
                             ShotImage(
                                 file = shot.file,
                                 maxDimension = 400,
-                                modifier = Modifier.fillMaxWidth().aspectRatio(0.75f).clip(MaterialTheme.shapes.medium),
+                                modifier = Modifier
+                                    .width(78.dp)
+                                    .height(104.dp)
+                                    .clip(MaterialTheme.shapes.medium),
                             )
-                            Text(labelFor(shot), style = MaterialTheme.typography.labelLarge, maxLines = 1)
-                            Text(
-                                formatTime(context, shot.timestamp),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
+                            Spacer(Modifier.width(16.dp))
+                            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                Text(labelFor(shot), style = MaterialTheme.typography.titleMedium, maxLines = 1)
+                                Text(
+                                    formatTime(context, shot.timestamp),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = colors.onSurfaceVariant,
+                                )
+                                Surface(shape = CircleShape, color = colors.errorContainer) {
+                                    Text(
+                                        stringResource(R.string.failed_unlock),
+                                        style = MaterialTheme.typography.labelLarge,
+                                        color = colors.onErrorContainer,
+                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp),
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -129,28 +184,34 @@ fun IntrudersTab(
                     .fillMaxSize()
                     .background(Color.Black)
                     .safeDrawingPadding()
-                    .padding(16.dp),
+                    .padding(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 ShotImage(
                     file = shot.file,
                     maxDimension = 1600,
                     contentScale = ContentScale.Fit,
-                    modifier = Modifier.weight(1f).fillMaxWidth(),
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                        .clip(MaterialTheme.shapes.large),
                 )
                 Text(
                     stringResource(R.string.intruder_tried_to_open, labelFor(shot)),
                     color = Color.White,
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(top = 12.dp),
+                    modifier = Modifier.padding(top = 16.dp),
                 )
                 Text(formatTime(context, shot.timestamp), color = Color.LightGray, style = MaterialTheme.typography.bodyMedium)
-                Row(Modifier.padding(top = 12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    OutlinedButton(onClick = { open = null }) { Text(stringResource(R.string.intruder_close)) }
-                    OutlinedButton(onClick = {
-                        onDelete(shot)
-                        open = null
-                    }) { Text(stringResource(R.string.intruder_delete)) }
+                Row(Modifier.padding(top = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    FilledTonalButton(onClick = { open = null }) { Text(stringResource(R.string.intruder_close)) }
+                    Button(
+                        onClick = {
+                            onDelete(shot)
+                            open = null
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = colors.error, contentColor = colors.onError),
+                    ) { Text(stringResource(R.string.intruder_delete)) }
                 }
             }
         }

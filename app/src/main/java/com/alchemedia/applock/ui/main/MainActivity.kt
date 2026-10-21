@@ -20,6 +20,7 @@ import com.alchemedia.applock.R
 import com.alchemedia.applock.intruder.IntruderCamera
 import com.alchemedia.applock.ui.lock.LockScreen
 import com.alchemedia.applock.ui.lock.LockViewModel
+import com.alchemedia.applock.ui.theme.AppBackdrop
 import com.alchemedia.applock.ui.theme.AppLockTheme
 import com.alchemedia.applock.ui.theme.ImmersiveMode
 import kotlinx.coroutines.launch
@@ -46,7 +47,7 @@ class MainActivity : FragmentActivity() {
 
         setContent {
             AppLockTheme {
-                Surface(color = MaterialTheme.colorScheme.background) {
+                AppBackdrop {
                     val settings by mainViewModel.settings.collectAsState()
                     val lockUi by lockViewModel.ui.collectAsState()
                     val current = settings

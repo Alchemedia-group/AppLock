@@ -32,6 +32,7 @@ import com.alchemedia.applock.R
 import com.alchemedia.applock.intruder.IntruderCamera
 import com.alchemedia.applock.security.UnlockSession
 import com.alchemedia.applock.security.isBiometricAvailable
+import com.alchemedia.applock.ui.theme.AppBackdrop
 import com.alchemedia.applock.ui.theme.AppLockTheme
 import com.alchemedia.applock.ui.theme.ImmersiveMode
 import kotlinx.coroutines.flow.filterNotNull
@@ -78,7 +79,7 @@ class LockActivity : FragmentActivity() {
                 val target = targetPackage
                 val appInfo = remember(target) { target?.let(::loadTargetApp) }
                 val current = settings
-                Surface(color = MaterialTheme.colorScheme.background) {
+                AppBackdrop {
                     if (current != null) {
                         LockScreen(
                             settings = current,

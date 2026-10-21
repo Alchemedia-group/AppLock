@@ -1,14 +1,26 @@
 package com.alchemedia.applock.ui.main
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -17,18 +29,30 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.alchemedia.applock.R
 import com.alchemedia.applock.data.AppSettings
 
-private enum class Tab(val label: Int, val icon: ImageVector) {
-    Apps(R.string.tab_apps, Icons.Default.Lock),
-    Intruders(R.string.tab_intruders, Icons.Default.Face),
-    Settings(R.string.tab_settings, Icons.Default.Settings),
+private enum class Tab(
+    val label: Int,
+    val title: Int,
+    val subtitle: Int,
+    val icon: @Composable () -> Painter,
+) {
+    Apps(R.string.tab_apps, R.string.header_apps, R.string.header_apps_sub, { rememberVectorPainter(Icons.Default.Lock) }),
+    Intruders(R.string.tab_intruders, R.string.header_intruders, R.string.header_intruders_sub, { painterResource(R.drawable.ic_camera) }),
+    Settings(R.string.tab_settings, R.string.header_settings, R.string.header_settings_sub, { rememberVectorPainter(Icons.Default.Settings) }),
 }
 
 @Composable
@@ -57,46 +81,93 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
         return
     }
 
-    Scaffold(
-        bottomBar = {
-            NavigationBar {
+    val current = Tab.entries[tab]
+    Box(Modifier.fillMaxSize()) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .statusBarsPadding(),
+        ) {
+            Column(Modifier.padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 12.dp)) {
+                Text(stringResource(current.title), style = MaterialTheme.typography.headlineMedium)
+                Text(
+                    stringResource(current.subtitle),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            val content = Modifier.weight(1f)
+            when (current) {
+                Tab.Apps -> AppsTab(
+                    settings = settings,
+                    apps = apps,
+                    status = status,
+                    onToggle = viewModel::setLocked,
+                    modifier = content,
+                )
+                Tab.Intruders -> IntrudersTab(
+                    shots = shots,
+                    onDelete = viewModel::deleteShot,
+                    onDeleteAll = viewModel::deleteAllShots,
+                    modifier = content,
+                )
+                Tab.Settings -> SettingsTab(
+                    settings = settings,
+                    status = status,
+                    onChangeCredential = { changingCredential = true },
+                    onBiometric = { viewModel.setBiometricEnabled(it) },
+                    onShuffle = { viewModel.setShuffleKeypad(it) },
+                    onCapture = { viewModel.setCaptureIntruders(it) },
+                    onAttempts = { viewModel.setAttemptsBeforeCapture(it) },
+                    onRelock = { viewModel.setRelockMode(it) },
+                    modifier = content,
+                )
+            }
+        }
+        // Floats over the lists, which keep bottom padding so the last row can scroll clear of it.
+        Box(Modifier.align(Alignment.BottomCenter)) {
+            FloatingNav(selected = tab, onSelect = { tab = it })
+        }
+    }
+}
+
+/** Floating pill navigation: the selected tab expands to show its label. */
+@Composable
+private fun FloatingNav(selected: Int, onSelect: (Int) -> Unit) {
+    val colors = MaterialTheme.colorScheme
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .padding(start = 32.dp, end = 32.dp, bottom = 20.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Surface(
+            shape = CircleShape,
+            color = colors.surfaceContainerHigh,
+            shadowElevation = 14.dp,
+        ) {
+            Row(Modifier.padding(6.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 Tab.entries.forEachIndexed { index, entry ->
-                    NavigationBarItem(
-                        selected = tab == index,
-                        onClick = { tab = index },
-                        icon = { Icon(entry.icon, contentDescription = null) },
-                        label = { Text(stringResource(entry.label)) },
-                    )
+                    val on = index == selected
+                    val background by animateColorAsState(if (on) colors.primary else Color.Transparent, label = "tabBg")
+                    val tint = if (on) colors.onPrimary else colors.onSurfaceVariant
+                    Row(
+                        Modifier
+                            .clip(CircleShape)
+                            .background(background)
+                            .clickable(role = Role.Tab) { onSelect(index) }
+                            .padding(horizontal = 18.dp, vertical = 12.dp)
+                            .animateContentSize(),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(entry.icon(), contentDescription = if (on) null else stringResource(entry.label), tint = tint)
+                        if (on) {
+                            Spacer(Modifier.width(8.dp))
+                            Text(stringResource(entry.label), color = tint, style = MaterialTheme.typography.labelLarge)
+                        }
+                    }
                 }
             }
-        },
-    ) { padding ->
-        val content = Modifier.padding(padding)
-        when (Tab.entries[tab]) {
-            Tab.Apps -> AppsTab(
-                settings = settings,
-                apps = apps,
-                status = status,
-                onToggle = viewModel::setLocked,
-                modifier = content,
-            )
-            Tab.Intruders -> IntrudersTab(
-                shots = shots,
-                onDelete = viewModel::deleteShot,
-                onDeleteAll = viewModel::deleteAllShots,
-                modifier = content,
-            )
-            Tab.Settings -> SettingsTab(
-                settings = settings,
-                status = status,
-                onChangeCredential = { changingCredential = true },
-                onBiometric = { viewModel.setBiometricEnabled(it) },
-                onShuffle = { viewModel.setShuffleKeypad(it) },
-                onCapture = { viewModel.setCaptureIntruders(it) },
-                onAttempts = { viewModel.setAttemptsBeforeCapture(it) },
-                onRelock = { viewModel.setRelockMode(it) },
-                modifier = content,
-            )
         }
     }
 }

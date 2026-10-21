@@ -76,17 +76,23 @@ fun PatternEntry(
                 )
             },
     ) {
-        val stroke = 6.dp.toPx()
+        val stroke = 5.dp.toPx()
+        val line = active.copy(alpha = 0.85f)
         for (i in 1 until selected.size) {
-            drawLine(active, dotCenter(selected[i - 1]), dotCenter(selected[i]), stroke, StrokeCap.Round)
+            drawLine(line, dotCenter(selected[i - 1]), dotCenter(selected[i]), stroke, StrokeCap.Round)
         }
         val tip = pointer
         if (tip != null && selected.isNotEmpty()) {
-            drawLine(active, dotCenter(selected.last()), tip, stroke, StrokeCap.Round)
+            drawLine(line, dotCenter(selected.last()), tip, stroke, StrokeCap.Round)
         }
         for (i in 0..8) {
             val on = i in selected
-            drawCircle(if (on) active else idle, radius = if (on) 14.dp.toPx() else 9.dp.toPx(), center = dotCenter(i))
+            if (on) drawCircle(active.copy(alpha = 0.2f), radius = 32.dp.toPx(), center = dotCenter(i))
+            drawCircle(
+                color = if (on) active else idle,
+                radius = if (on) 12.dp.toPx() else 7.dp.toPx(),
+                center = dotCenter(i),
+            )
         }
     }
 }

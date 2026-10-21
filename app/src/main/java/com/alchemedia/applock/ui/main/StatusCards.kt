@@ -4,28 +4,41 @@ import android.content.Intent
 import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.alchemedia.applock.R
 import com.alchemedia.applock.security.SetupStatus
+import com.alchemedia.applock.ui.components.IconTile
 
 /** Permission/service status that re-reads whenever the app returns to the foreground. */
 @Composable
@@ -49,52 +62,105 @@ fun rememberCameraRequest(): () -> Unit {
     return { launcher.launch(android.Manifest.permission.CAMERA) }
 }
 
+/** Big status card at the top of the Apps tab: green-lit when the service runs, coral when it doesn't. */
 @Composable
-fun PermissionCard(
-    title: String,
-    body: String,
-    actionLabel: String,
-    onAction: () -> Unit,
+fun ProtectionHero(
+    active: Boolean,
+    lockedCount: Int,
+    onTurnOn: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Card(
-        modifier = modifier,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
+    val colors = MaterialTheme.colorScheme
+    val brush = if (active) {
+        Brush.linearGradient(listOf(colors.primaryContainer, colors.surfaceContainerHigh))
+    } else {
+        Brush.linearGradient(listOf(colors.errorContainer, colors.surfaceContainerHigh))
+    }
+    val accent = if (active) colors.primary else colors.error
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        shape = MaterialTheme.shapes.extraLarge,
+        color = colors.surfaceContainer,
     ) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(title, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onErrorContainer)
-            Text(body, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onErrorContainer)
-            Spacer(Modifier.height(8.dp))
-            Button(onClick = onAction) { Text(actionLabel) }
+        Column(
+            Modifier
+                .background(brush)
+                .padding(20.dp),
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    Modifier
+                        .size(60.dp)
+                        .clip(CircleShape)
+                        .background(accent.copy(alpha = 0.18f)),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(painterResource(R.drawable.ic_shield), contentDescription = null, tint = accent, modifier = Modifier.size(32.dp))
+                }
+                Spacer(Modifier.width(16.dp))
+                Column(Modifier.weight(1f)) {
+                    Text(
+                        stringResource(if (active) R.string.hero_active else R.string.hero_off),
+                        style = MaterialTheme.typography.titleLarge,
+                    )
+                    Text(
+                        when {
+                            !active -> stringResource(R.string.hero_off_sub)
+                            lockedCount == 0 -> stringResource(R.string.hero_none)
+                            else -> stringResource(R.string.hero_locked_count, lockedCount)
+                        },
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = colors.onSurfaceVariant,
+                    )
+                }
+            }
+            if (!active) {
+                Spacer(Modifier.height(16.dp))
+                Button(
+                    onClick = onTurnOn,
+                    colors = ButtonDefaults.buttonColors(containerColor = colors.error, contentColor = colors.onError),
+                ) { Text(stringResource(R.string.permission_accessibility_action)) }
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    stringResource(R.string.permission_accessibility_body),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = colors.onSurfaceVariant,
+                )
+            }
         }
     }
 }
 
-/** The accessibility and camera prompts, shown only for whatever is still missing. */
+/** Slim prompt for the camera permission, shown only while intruder photos are on and it is missing. */
 @Composable
-fun MissingPermissionCards(
-    status: SetupStatus,
-    needsCamera: Boolean,
-    modifier: Modifier = Modifier,
-) {
-    val openSettings = openAccessibilitySettings()
-    val requestCamera = rememberCameraRequest()
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        if (!status.accessibilityEnabled) {
-            PermissionCard(
-                title = stringResource(R.string.permission_accessibility_title),
-                body = stringResource(R.string.permission_accessibility_body),
-                actionLabel = stringResource(R.string.permission_accessibility_action),
-                onAction = openSettings,
+fun CameraPermissionBanner(modifier: Modifier = Modifier) {
+    val request = rememberCameraRequest()
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        shape = MaterialTheme.shapes.large,
+        color = MaterialTheme.colorScheme.surfaceContainer,
+    ) {
+        Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            IconTile(
+                painterResource(R.drawable.ic_camera),
+                tint = MaterialTheme.colorScheme.error,
+                background = MaterialTheme.colorScheme.errorContainer,
             )
-        }
-        if (needsCamera && !status.cameraGranted) {
-            PermissionCard(
-                title = stringResource(R.string.permission_camera_title),
-                body = stringResource(R.string.permission_camera_body),
-                actionLabel = stringResource(R.string.permission_camera_action),
-                onAction = requestCamera,
-            )
+            Spacer(Modifier.width(14.dp))
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(stringResource(R.string.permission_camera_title), style = MaterialTheme.typography.titleSmall)
+                Text(
+                    stringResource(R.string.permission_camera_body),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Spacer(Modifier.width(10.dp))
+            Button(onClick = request) { Text(stringResource(R.string.permission_camera_action)) }
         }
     }
 }

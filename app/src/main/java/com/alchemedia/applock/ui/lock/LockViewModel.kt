@@ -21,6 +21,8 @@ import kotlinx.coroutines.withContext
 
 data class LockUiState(
     val wrongAttempt: Boolean = false,
+    /** Running failure count; changes on every failure so the UI can replay its shake animation. */
+    val attempt: Int = 0,
     /** [SystemClock.elapsedRealtime] timestamp until which input is refused, or 0. */
     val lockedUntil: Long = 0L,
 )
@@ -74,7 +76,7 @@ class LockViewModel(app: Application) : AndroidViewModel(app) {
         } else {
             0L
         }
-        _ui.value = LockUiState(wrongAttempt = true, lockedUntil = lockedUntil)
+        _ui.value = LockUiState(wrongAttempt = true, attempt = failures, lockedUntil = lockedUntil)
     }
 
     fun onSuccessfulBiometric() {
