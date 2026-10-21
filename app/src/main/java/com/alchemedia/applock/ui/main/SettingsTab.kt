@@ -1,6 +1,14 @@
 package com.alchemedia.applock.ui.main
 
+import android.app.LocaleManager
 import android.net.Uri
+import android.os.Build
+import android.os.LocaleList
+import androidx.annotation.RequiresApi
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
@@ -48,6 +56,8 @@ fun SettingsTab(
     status: SetupStatus,
     onChangeCredential: () -> Unit,
     onHelp: () -> Unit,
+    onUpgrade: () -> Unit,
+    priceText: String,
     onBiometric: (Boolean) -> Unit,
     onShuffle: (Boolean) -> Unit,
     onCapture: (Boolean) -> Unit,
@@ -80,6 +90,17 @@ fun SettingsTab(
             .verticalScroll(rememberScrollState())
             .padding(bottom = 112.dp),
     ) {
+        SectionLabel(stringResource(R.string.pro_title))
+        GroupCard {
+            SettingRow(
+                title = stringResource(R.string.pro_tagline),
+                subtitle = stringResource(if (settings.proUnlocked) R.string.pro_row_owned else R.string.pro_row_locked, priceText),
+                icon = painterResource(R.drawable.ic_camera),
+                onClick = onUpgrade,
+                trailing = { if (!settings.proUnlocked) ProBadge() },
+            )
+        }
+
         SectionLabel(stringResource(R.string.settings_section_status))
         GroupCard {
             SettingRow(
@@ -160,10 +181,18 @@ fun SettingsTab(
         GroupCard {
             SettingRow(
                 title = stringResource(R.string.settings_capture),
+                subtitle = if (settings.proUnlocked) null else stringResource(R.string.pro_settings_locked_hint),
                 icon = painterResource(R.drawable.ic_camera),
-                trailing = { Switch(checked = settings.captureIntruders, onCheckedChange = onCapture) },
+                onClick = if (settings.proUnlocked) null else onUpgrade,
+                trailing = {
+                    if (settings.proUnlocked) {
+                        Switch(checked = settings.captureIntruders, onCheckedChange = onCapture)
+                    } else {
+                        ProBadge()
+                    }
+                },
             )
-            if (settings.captureIntruders) {
+            if (settings.proUnlocked && settings.captureIntruders) {
                 Column(Modifier.padding(horizontal = 16.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Text(
                         stringResource(R.string.settings_attempts, settings.attemptsBeforeCapture),
@@ -194,6 +223,11 @@ fun SettingsTab(
                     )
                 }
             }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            SectionLabel(stringResource(R.string.settings_section_language))
+            LanguageGroup()
         }
 
         SectionLabel(stringResource(R.string.settings_section_relock))
@@ -253,5 +287,44 @@ fun SettingsTab(
             color = colors.onSurfaceVariant,
             modifier = Modifier.padding(horizontal = 28.dp),
         )
+    }
+}
+
+private val LANGUAGES = listOf(
+    "" to R.string.language_system,
+    "en" to R.string.lang_en,
+    "es" to R.string.lang_es,
+    "de" to R.string.lang_de,
+    "fr" to R.string.lang_fr,
+    "it" to R.string.lang_it,
+    "pt" to R.string.lang_pt,
+    "pl" to R.string.lang_pl,
+)
+
+/** Per-app language: Android 13+ stores the choice and restarts the activity in the new language. */
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@Composable
+private fun LanguageGroup() {
+    val context = LocalContext.current
+    val manager = remember { context.getSystemService(LocaleManager::class.java) }
+    var selected by remember {
+        mutableStateOf(manager.applicationLocales.let { if (it.isEmpty) "" else it[0].language })
+    }
+    GroupCard {
+        LANGUAGES.forEach { (tag, label) ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(role = Role.RadioButton) {
+                        selected = tag
+                        manager.applicationLocales = if (tag.isEmpty()) LocaleList.getEmptyLocaleList() else LocaleList.forLanguageTags(tag)
+                    }
+                    .padding(horizontal = 12.dp, vertical = 4.dp),
+            ) {
+                RadioButton(selected = selected == tag, onClick = null, modifier = Modifier.padding(12.dp))
+                Text(stringResource(label), style = MaterialTheme.typography.bodyLarge)
+            }
+        }
     }
 }

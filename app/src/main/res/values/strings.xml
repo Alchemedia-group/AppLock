@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AppLock</string>
+    <string name="app_name" translatable="false">AppLock</string>
     <string name="accessibility_service_description">AppLock uses this service only to notice which app is in the foreground so it can ask for your PIN or pattern before a protected app opens. It never reads screen content and nothing leaves your device.</string>
 
     <!-- Tabs -->
@@ -58,7 +58,7 @@
         <item quantity="other">%1$d photos captured</item>
     </plurals>
     <string name="failed_unlock">Failed unlock</string>
-    <string name="chevron">›</string>
+    <string name="chevron" translatable="false">›</string>
 
     <!-- Apps tab -->
     <string name="search_apps">Search apps</string>
@@ -73,7 +73,7 @@
 
     <!-- Intruders tab -->
     <string name="intruders_empty">No intruder photos yet.\nA photo is saved when someone fails to unlock.</string>
-    <string name="intruder_unknown_app">AppLock</string>
+    <string name="intruder_unknown_app" translatable="false">AppLock</string>
     <string name="intruder_delete">Delete photo</string>
     <string name="intruder_close">Close</string>
     <string name="intruder_delete_all">Delete all</string>
@@ -116,9 +116,9 @@
     <string name="perm_service_title">AppLock service</string>
     <string name="perm_service_body">Detects when a protected app opens. Required.</string>
     <string name="perm_camera_title">Camera</string>
-    <string name="perm_camera_body">Takes the intruder photo.</string>
+    <string name="perm_camera_body">Takes the intruder photo. Part of Pro.</string>
     <string name="perm_notifications_title">Hide notification contents</string>
-    <string name="perm_notifications_body">Shows "New notification" instead of the message from locked apps.</string>
+    <string name="perm_notifications_body">Shows \"New notification\" instead of the message from locked apps.</string>
     <string name="perm_granted">On</string>
     <string name="perm_enable">Enable</string>
     <string name="perm_restricted_hint">If the switch is greyed out: App info, menu, Allow restricted settings.</string>
@@ -142,14 +142,14 @@
     <string name="fake_crash_app_info">App info</string>
     <string name="fake_crash_close">Close app</string>
     <string name="settings_fake_crash">Fake crash screen</string>
-    <string name="settings_fake_crash_hint">Locked apps look like they crashed. Long-press "Close app" to unlock.</string>
+    <string name="settings_fake_crash_hint">Locked apps look like they crashed. Long-press \"Close app\" to unlock.</string>
 
     <!-- Notifications -->
     <string name="hidden_notification_text">New notification</string>
     <string name="hidden_notification_channel">Hidden notifications</string>
     <string name="settings_section_notifications">Notifications</string>
     <string name="settings_hide_notifications">Hide notifications from locked apps</string>
-    <string name="settings_hide_notifications_hint">Replaces their content with "New notification".</string>
+    <string name="settings_hide_notifications_hint">Replaces their content with \"New notification\".</string>
     <string name="settings_notifications_needs_access">Allow notification access to finish turning this on.</string>
 
     <!-- Photos: share, save, auto delete -->
@@ -207,4 +207,43 @@
     <string name="guide_trouble_brand">Xiaomi, Oppo, Vivo, OnePlus and others: also allow Autostart or background activity for AppLock in the phone\'s security or battery settings.</string>
     <string name="guide_done">Done</string>
     <string name="guide_close">Close</string>
+
+    <!-- Pro -->
+    <string name="pro_title" translatable="false">AppLock Pro</string>
+    <string name="pro_tagline">Catch whoever tries to get in.</string>
+    <string name="pro_feature_photo">A photo of anyone who fails to unlock</string>
+    <string name="pro_feature_attempts">Choose how many failed attempts trigger it</string>
+    <string name="pro_feature_once">One payment. No subscription.</string>
+    <string name="pro_price_fallback" translatable="false">£4.99</string>
+    <string name="pro_buy">Unlock Pro for %1$s</string>
+    <string name="pro_restore">Restore purchase</string>
+    <string name="pro_owned_title">You have Pro</string>
+    <string name="pro_owned_body">Intruder photos are on. You can switch them off any time in Settings.</string>
+    <string name="pro_unavailable">Purchases aren\'t available right now. They work once AppLock is installed from Google Play and you are online.</string>
+    <string name="pro_cancelled">Purchase cancelled.</string>
+    <string name="pro_pending">Your payment is pending. Pro unlocks when it completes.</string>
+    <string name="pro_failed">The purchase didn\'t go through. Please try again.</string>
+    <string name="pro_restored">Pro restored. Thank you.</string>
+    <string name="pro_nothing_to_restore">No purchase found on this Google account.</string>
+    <string name="pro_debug_unlock">Enable Pro for testing (debug build only)</string>
+    <string name="pro_badge" translatable="false">PRO</string>
+    <string name="pro_promo_title">Catch intruders with Pro</string>
+    <string name="pro_promo_body">Take a photo of anyone who fails to unlock. One payment of %1$s.</string>
+    <string name="pro_settings_locked_hint">Unlock Pro to photograph failed attempts</string>
+    <string name="pro_intruders_title">Intruder photos are a Pro feature</string>
+    <string name="pro_intruders_body">Unlock Pro to take a photo whenever someone fails to unlock.</string>
+    <string name="pro_see">See Pro</string>
+    <string name="pro_row_owned">Unlocked</string>
+    <string name="pro_row_locked">Unlock for %1$s</string>
+
+    <!-- Language -->
+    <string name="settings_section_language">Language</string>
+    <string name="language_system">Phone language</string>
+    <string name="lang_en" translatable="false">English</string>
+    <string name="lang_es" translatable="false">Español</string>
+    <string name="lang_de" translatable="false">Deutsch</string>
+    <string name="lang_fr" translatable="false">Français</string>
+    <string name="lang_it" translatable="false">Italiano</string>
+    <string name="lang_pt" translatable="false">Português</string>
+    <string name="lang_pl" translatable="false">Polski</string>
 </resources>

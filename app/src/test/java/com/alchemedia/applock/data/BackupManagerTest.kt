@@ -22,6 +22,7 @@ class BackupManagerTest {
         fakeCrash = true,
         hideNotifications = true,
         autoDeleteDays = 30,
+        proUnlocked = true,
     )
 
     @Test
@@ -47,6 +48,14 @@ class BackupManagerTest {
         assertFalse(json.contains("secret-salt"))
         assertFalse(json.contains("recovery-hash"))
         assertFalse(json.contains("recovery-salt"))
+    }
+
+    @Test
+    fun backupNeverGrantsPro() {
+        // Restoring a file must not be a way to unlock Pro.
+        assertFalse(BackupManager.toJson(sample).contains("pro", ignoreCase = true))
+        assertFalse(BackupManager.fromJson(BackupManager.toJson(sample))!!.proUnlocked)
+        assertFalse(BackupManager.fromJson("""{"app":"applock","version":1,"proUnlocked":true}""")!!.proUnlocked)
     }
 
     @Test

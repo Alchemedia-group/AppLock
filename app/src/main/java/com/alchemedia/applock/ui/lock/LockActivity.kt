@@ -67,7 +67,7 @@ class LockActivity : FragmentActivity() {
         }
         lifecycleScope.launch {
             val settings = viewModel.settings.filterNotNull().first()
-            if (settings.captureIntruders) camera.start()
+            if (settings.captureIntruders && settings.proUnlocked) camera.start()
             // With the fake crash screen up, a fingerprint prompt would give the game away.
             if (settings.biometricEnabled && !settings.fakeCrash && isBiometricAvailable(this@LockActivity)) {
                 lifecycle.withResumed { showBiometricPrompt() }

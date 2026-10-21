@@ -56,7 +56,7 @@ class MainActivity : FragmentActivity() {
                     val lockUi by lockViewModel.ui.collectAsState()
                     val current = settings
                     val gateShown = current != null && current.setupComplete && !mainViewModel.authenticated
-                    val captureEnabled = current?.captureIntruders == true
+                    val captureEnabled = current?.captureIntruders == true && current.proUnlocked
                     // Only hold the camera while the entry screen is up.
                     LaunchedEffect(gateShown, captureEnabled) {
                         if (gateShown && captureEnabled) camera.start() else camera.stop()
@@ -94,6 +94,12 @@ class MainActivity : FragmentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) ImmersiveMode.apply(window)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Re-checks the Pro purchase with Google Play each time the app opens.
+        mainViewModel.startBilling()
     }
 
     override fun onStop() {

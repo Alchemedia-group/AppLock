@@ -70,6 +70,8 @@ fun IntrudersTab(
     shots: List<IntruderShot>,
     onDelete: (IntruderShot) -> Unit,
     onDeleteAll: () -> Unit,
+    isPro: Boolean,
+    onUpgrade: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var open by remember { mutableStateOf<IntruderShot?>(null) }
@@ -119,11 +121,27 @@ fun IntrudersTab(
                     size = 72.dp,
                 )
                 Spacer(Modifier.height(20.dp))
-                Text(
-                    stringResource(R.string.intruders_empty),
-                    textAlign = TextAlign.Center,
-                    color = colors.onSurfaceVariant,
-                )
+                if (isPro) {
+                    Text(
+                        stringResource(R.string.intruders_empty),
+                        textAlign = TextAlign.Center,
+                        color = colors.onSurfaceVariant,
+                    )
+                } else {
+                    Text(
+                        stringResource(R.string.pro_intruders_title),
+                        style = MaterialTheme.typography.titleMedium,
+                        textAlign = TextAlign.Center,
+                    )
+                    Spacer(Modifier.height(6.dp))
+                    Text(
+                        stringResource(R.string.pro_intruders_body),
+                        textAlign = TextAlign.Center,
+                        color = colors.onSurfaceVariant,
+                    )
+                    Spacer(Modifier.height(20.dp))
+                    Button(onClick = onUpgrade) { Text(stringResource(R.string.pro_see)) }
+                }
             }
         } else {
             LazyColumn(

@@ -23,4 +23,6 @@ data class AppSettings(
     val hideNotifications: Boolean = false,
     /** Delete intruder photos older than this many days; 0 keeps them forever. */
     val autoDeleteDays: Int = 0,
+    /** True once the one-time Pro purchase has been verified with Google Play. */
+    val proUnlocked: Boolean = false,
 )

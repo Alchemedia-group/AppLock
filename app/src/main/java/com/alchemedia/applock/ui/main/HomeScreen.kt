@@ -64,6 +64,7 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
     var changingCredential by rememberSaveable { mutableStateOf(false) }
     var newRecoveryCode by rememberSaveable { mutableStateOf<String?>(null) }
     var showGuide by rememberSaveable { mutableStateOf(false) }
+    var showPro by rememberSaveable { mutableStateOf(false) }
 
     val apps by viewModel.apps.collectAsState()
     val shots by viewModel.shots.collectAsState()
@@ -91,6 +92,14 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
             },
             onCancel = { changingCredential = false },
         )
+        return
+    }
+
+    val billing by viewModel.billingState.collectAsState()
+    val priceText = billing.priceText ?: stringResource(R.string.pro_price_fallback)
+
+    if (showPro) {
+        ProScreen(settings = settings, viewModel = viewModel, onClose = { showPro = false })
         return
     }
 
@@ -134,12 +143,16 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                     status = status,
                     onToggle = viewModel::setLocked,
                     onHelp = { showGuide = true },
+                    onUpgrade = { showPro = true },
+                    priceText = priceText,
                     modifier = content,
                 )
                 Tab.Intruders -> IntrudersTab(
                     shots = shots,
                     onDelete = viewModel::deleteShot,
                     onDeleteAll = viewModel::deleteAllShots,
+                    isPro = settings.proUnlocked,
+                    onUpgrade = { showPro = true },
                     modifier = content,
                 )
                 Tab.Settings -> SettingsTab(
@@ -147,6 +160,8 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                     status = status,
                     onChangeCredential = { changingCredential = true },
                     onHelp = { showGuide = true },
+                    onUpgrade = { showPro = true },
+                    priceText = priceText,
                     onBiometric = { viewModel.setBiometricEnabled(it) },
                     onShuffle = { viewModel.setShuffleKeypad(it) },
                     onCapture = { viewModel.setCaptureIntruders(it) },

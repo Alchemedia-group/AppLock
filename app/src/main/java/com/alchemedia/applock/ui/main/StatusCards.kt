@@ -181,3 +181,43 @@ fun CameraPermissionBanner(modifier: Modifier = Modifier) {
         }
     }
 }
+
+/** Small upsell under the status card for free users. */
+@Composable
+fun ProPromoCard(priceText: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Surface(
+        onClick = onClick,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        shape = MaterialTheme.shapes.large,
+        color = MaterialTheme.colorScheme.surfaceContainer,
+    ) {
+        Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            IconTile(painterResource(R.drawable.ic_camera))
+            Spacer(Modifier.width(14.dp))
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(stringResource(R.string.pro_promo_title), style = MaterialTheme.typography.titleSmall)
+                Text(
+                    stringResource(R.string.pro_promo_body, priceText),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            Spacer(Modifier.width(10.dp))
+            ProBadge()
+        }
+    }
+}
+
+@Composable
+fun ProBadge(modifier: Modifier = Modifier) {
+    Surface(modifier = modifier, shape = CircleShape, color = MaterialTheme.colorScheme.primary) {
+        Text(
+            stringResource(R.string.pro_badge),
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.onPrimary,
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+        )
+    }
+}

@@ -36,6 +36,7 @@ class SettingsRepository(private val context: Context) {
         val FAKE_CRASH = booleanPreferencesKey("fake_crash")
         val HIDE_NOTIFICATIONS = booleanPreferencesKey("hide_notifications")
         val AUTO_DELETE_DAYS = intPreferencesKey("auto_delete_days")
+        val PRO_UNLOCKED = booleanPreferencesKey("pro_unlocked")
     }
 
     val settings: Flow<AppSettings> = context.settingsStore.data.map { it.toSettings() }
@@ -88,6 +89,7 @@ class SettingsRepository(private val context: Context) {
     suspend fun setShuffleKeypad(value: Boolean) = update { it[Keys.SHUFFLE] = value }
     suspend fun setFakeCrash(value: Boolean) = update { it[Keys.FAKE_CRASH] = value }
     suspend fun setHideNotifications(value: Boolean) = update { it[Keys.HIDE_NOTIFICATIONS] = value }
+    suspend fun setProUnlocked(value: Boolean) = update { it[Keys.PRO_UNLOCKED] = value }
     suspend fun setAutoDeleteDays(value: Int) = update { it[Keys.AUTO_DELETE_DAYS] = value.coerceAtLeast(0) }
 
     private suspend fun update(block: (MutablePreferences) -> Unit) {
@@ -110,6 +112,7 @@ class SettingsRepository(private val context: Context) {
         fakeCrash = this[Keys.FAKE_CRASH] ?: false,
         hideNotifications = this[Keys.HIDE_NOTIFICATIONS] ?: false,
         autoDeleteDays = this[Keys.AUTO_DELETE_DAYS] ?: 0,
+        proUnlocked = this[Keys.PRO_UNLOCKED] ?: false,
     )
 
     private inline fun <reified E : Enum<E>> enumOrDefault(name: String?, default: E): E =

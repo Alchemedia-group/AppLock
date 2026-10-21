@@ -48,6 +48,8 @@ fun AppsTab(
     status: SetupStatus,
     onToggle: (String, Boolean) -> Unit,
     onHelp: () -> Unit,
+    onUpgrade: () -> Unit,
+    priceText: String,
     modifier: Modifier = Modifier,
 ) {
     var query by remember { mutableStateOf("") }
@@ -75,7 +77,9 @@ fun AppsTab(
                 onHelp = onHelp,
             )
         }
-        if (settings.captureIntruders && !status.cameraGranted) {
+        if (!settings.proUnlocked) {
+            item { ProPromoCard(priceText = priceText, onClick = onUpgrade) }
+        } else if (settings.captureIntruders && !status.cameraGranted) {
             item { CameraPermissionBanner() }
         }
         item {

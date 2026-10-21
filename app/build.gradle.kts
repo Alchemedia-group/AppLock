@@ -35,6 +35,12 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+
+    androidResources {
+        // Only ship the languages AppLock is translated into (drops unused library locales).
+        localeFilters += listOf("en", "es", "de", "fr", "it", "pt", "pl")
     }
 }
 
@@ -60,6 +66,7 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.biometric)
     implementation(libs.androidx.exifinterface)
+    implementation(libs.androidx.billing)
 
     testImplementation(libs.junit)
     // android.jar only ships stubs for org.json, so unit tests need a real implementation.

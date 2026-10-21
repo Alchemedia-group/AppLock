@@ -68,7 +68,7 @@ class LockViewModel(app: Application) : AndroidViewModel(app) {
     fun registerFailure() {
         val s = settings.value ?: return
         failures++
-        if (s.captureIntruders && failures % s.attemptsBeforeCapture == 0) {
+        if (s.captureIntruders && s.proUnlocked && failures % s.attemptsBeforeCapture == 0) {
             _captureRequests.tryEmit(failures)
         }
         val lockedUntil = if (failures % LOCKOUT_EVERY == 0) {

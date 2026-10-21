@@ -22,6 +22,17 @@ fingerprint screen and **silently photographs anyone who fails to unlock**.
 - Lock/overview screens are `FLAG_SECURE` (no screenshots, blank recents thumbnail)
 - No `INTERNET` permission. The secret is stored only as a salted PBKDF2-SHA256 hash
 
+## Pro and languages
+
+- **AppLock Pro** is a one-time in-app purchase (£4.99) that unlocks the intruder photo. Everything else is free.
+  Billing uses Google Play Billing (`billing/BillingManager`, product id `applock_pro`). To make it purchasable,
+  create a one-time product with that id in Play Console, set its GBP price to £4.99, activate it, and install a
+  build from an internal-testing track. The app shows the price Google Play returns for the user's country, and
+  re-checks ownership each time it opens. Debug builds have an *Enable Pro for testing* button; release builds do not.
+- **Languages:** English, Spanish, German, French, Italian, Portuguese and Polish. The app follows the phone language;
+  on Android 13+ you can also pick a language in Settings. Strings live in `res/values*/strings.xml` and a unit test
+  checks every language has every string and matching placeholders.
+
 ## How it works
 
 An `AccessibilityService` (`service/AppLockAccessibilityService`) listens for window-state changes — nothing else,

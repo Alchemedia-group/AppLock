@@ -48,6 +48,15 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    private val billing = appLock.billingManager
+    val billingState = billing.state
+
+    fun startBilling() = billing.start()
+    fun purchasePro(activity: android.app.Activity) = billing.purchase(activity)
+    fun restorePurchases() = billing.restore()
+    fun clearBillingMessage() = billing.clearMessage()
+    fun debugUnlockPro() = billing.debugUnlock()
+
     fun refreshShots() = intruders.refresh()
     fun deleteShot(shot: IntruderShot) = viewModelScope.launch(Dispatchers.IO) { intruders.delete(shot) }
     fun deleteAllShots() = viewModelScope.launch(Dispatchers.IO) { intruders.deleteAll() }
