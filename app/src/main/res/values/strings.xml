@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppLock</string>
+    <string name="accessibility_service_description">AppLock uses this service only to notice which app is in the foreground so it can ask for your PIN or pattern before a protected app opens. It never reads screen content and nothing leaves your device.</string>
+
+    <!-- Tabs -->
+    <string name="tab_apps">Apps</string>
+    <string name="tab_intruders">Intruders</string>
+    <string name="tab_settings">Settings</string>
+
+    <!-- Setup / credential -->
+    <string name="setup_title">Protect your apps</string>
+    <string name="setup_subtitle">Choose how you want to unlock AppLock and the apps you protect.</string>
+    <string name="lock_type_pin">PIN</string>
+    <string name="lock_type_pattern">Pattern</string>
+    <string name="setup_enter_pin">Enter a new PIN (4–8 digits)</string>
+    <string name="setup_confirm_pin">Confirm your PIN</string>
+    <string name="setup_draw_pattern">Draw a new pattern (at least 4 dots)</string>
+    <string name="setup_confirm_pattern">Draw the pattern again to confirm</string>
+    <string name="setup_too_short_pin">PIN must be at least 4 digits</string>
+    <string name="setup_too_short_pattern">Connect at least 4 dots</string>
+    <string name="setup_mismatch">That didn\'t match. Let\'s start over.</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Lock screen -->
+    <string name="unlock_app">Unlock %1$s</string>
+    <string name="unlock_applock">Unlock AppLock</string>
+    <string name="enter_pin">Enter your PIN</string>
+    <string name="draw_pattern">Draw your pattern</string>
+    <string name="wrong_pin">Wrong PIN. Try again.</string>
+    <string name="wrong_pattern">Wrong pattern. Try again.</string>
+    <string name="locked_out">Too many attempts. Try again in %1$d s.</string>
+    <string name="use_fingerprint">Use fingerprint</string>
+    <string name="biometric_title">Unlock</string>
+    <string name="biometric_use_secret">Use PIN or pattern</string>
+    <string name="confirm_pin">Confirm</string>
+    <string name="delete_digit">Delete</string>
+
+    <!-- Apps tab -->
+    <string name="search_apps">Search apps</string>
+    <string name="apps_locked_count">%1$d locked</string>
+    <string name="apps_empty">No apps found</string>
+    <string name="permission_accessibility_title">Turn on the AppLock service</string>
+    <string name="permission_accessibility_body">AppLock needs its accessibility service to detect when a protected app opens. If the switch is greyed out, open AppLock\'s App info, tap ⋮ and choose "Allow restricted settings".</string>
+    <string name="permission_accessibility_action">Open settings</string>
+    <string name="permission_camera_title">Allow camera for intruder photos</string>
+    <string name="permission_camera_body">AppLock quietly takes a photo with the front camera when someone fails to unlock.</string>
+    <string name="permission_camera_action">Allow camera</string>
+    <string name="service_enabled">Protection is active</string>
+    <string name="service_disabled">Protection is off</string>
+
+    <!-- Intruders tab -->
+    <string name="intruders_empty">No intruder photos yet.\nA photo is saved when someone fails to unlock.</string>
+    <string name="intruder_unknown_app">AppLock</string>
+    <string name="intruder_delete">Delete photo</string>
+    <string name="intruder_close">Close</string>
+    <string name="intruder_delete_all">Delete all</string>
+    <string name="intruder_delete_all_confirm">Tap again to delete all</string>
+    <string name="intruder_tried_to_open">Tried to open %1$s</string>
+
+    <!-- Settings tab -->
+    <string name="settings_section_lock">Lock</string>
+    <string name="settings_change_credential">Change PIN or pattern</string>
+    <string name="settings_biometric">Fingerprint / face unlock</string>
+    <string name="settings_biometric_unavailable">No fingerprint or face enrolled on this device</string>
+    <string name="settings_shuffle">Shuffle PIN keypad</string>
+    <string name="settings_shuffle_hint">Randomises key positions so smudges and shoulder-surfing reveal less</string>
+    <string name="settings_section_intruder">Intruder photo</string>
+    <string name="settings_capture">Take a photo after failed attempts</string>
+    <string name="settings_attempts">Failed attempts before photo: %1$d</string>
+    <string name="settings_section_relock">Lock again</string>
+    <string name="relock_immediate">As soon as I leave the app</string>
+    <string name="relock_one_minute">1 minute after I leave</string>
+    <string name="relock_five_minutes">5 minutes after I leave</string>
+    <string name="relock_screen_off">When the screen turns off</string>
+    <string name="settings_section_status">Status</string>
+    <string name="settings_privacy">AppLock has no internet permission. PINs are stored only as salted hashes and photos never leave this device.</string>
+</resources>
