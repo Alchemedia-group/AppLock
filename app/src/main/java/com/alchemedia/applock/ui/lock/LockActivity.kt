@@ -29,6 +29,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.withResumed
 import com.alchemedia.applock.AppLockApp
+import com.alchemedia.applock.BuildConfig
 import com.alchemedia.applock.R
 import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.intruder.IntruderCamera
@@ -57,7 +58,10 @@ class LockActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         // Keep the lock screen out of screenshots and the recents thumbnail.
-        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+        // Debug builds stay recordable so the Play demo video can be filmed; release builds block it.
+        if (!BuildConfig.DEBUG) {
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+        }
         targetPackage = intent.getStringExtra(EXTRA_PACKAGE)
 
         camera = IntruderCamera(this, (application as AppLockApp).intruderRepository)

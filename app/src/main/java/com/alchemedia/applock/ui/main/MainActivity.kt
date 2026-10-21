@@ -23,6 +23,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.alchemedia.applock.AppLockApp
+import com.alchemedia.applock.BuildConfig
 import com.alchemedia.applock.R
 import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.intruder.IntruderCamera
@@ -47,7 +48,10 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         // Keeps the app's contents (installed-app list, intruder photos) out of screenshots and recents.
-        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+        // Debug builds stay recordable so the Play demo video can be filmed; release builds block it.
+        if (!BuildConfig.DEBUG) {
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+        }
 
         camera = IntruderCamera(this, (application as AppLockApp).intruderRepository)
         // Wrong attempts at AppLock's own entry screen are photographed too (no target app).
