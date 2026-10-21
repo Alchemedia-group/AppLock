@@ -65,7 +65,7 @@ class LockedNotificationService : NotificationListenerService() {
             PendingIntent.getActivity(this, pkg.hashCode(), it, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         }
         val replacement = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_shield)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(label)
             .setContentText(getString(R.string.hidden_notification_text))
             .setContentIntent(tap)

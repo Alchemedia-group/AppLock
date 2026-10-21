@@ -95,7 +95,7 @@
     <string name="relock_five_minutes">5 minutes after I leave</string>
     <string name="relock_screen_off">When the screen turns off</string>
     <string name="settings_section_status">Status</string>
-    <string name="settings_privacy">AppLock has no internet permission. PINs are stored only as salted hashes and photos never leave this device.</string>
+    <string name="settings_privacy">PINs are stored only as salted hashes. Photos and your app list never leave this device. The only network use is Google Play handling the Pro purchase.</string>
 
     <!-- Onboarding -->
     <string name="onboard_welcome_title">Keep your apps private</string>
@@ -105,7 +105,7 @@
     <string name="onboard_feature_photo_title">Catch intruders</string>
     <string name="onboard_feature_photo_body">A quiet front-camera photo after a failed attempt.</string>
     <string name="onboard_feature_private_title">Stays on your phone</string>
-    <string name="onboard_feature_private_body">No internet permission. Nothing is uploaded.</string>
+    <string name="onboard_feature_private_body">Your PIN, photos and app list never leave this device.</string>
     <string name="onboard_get_started">Get started</string>
     <string name="onboard_back">Back</string>
     <string name="onboard_skip">Skip for now</string>

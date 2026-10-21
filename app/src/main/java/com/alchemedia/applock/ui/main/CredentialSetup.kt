@@ -30,7 +30,7 @@ import com.alchemedia.applock.ui.components.PATTERN_MIN_DOTS
 import com.alchemedia.applock.ui.components.PIN_MIN_LENGTH
 import com.alchemedia.applock.ui.components.PatternEntry
 import com.alchemedia.applock.ui.components.PinEntry
-import com.alchemedia.applock.ui.components.IconTile
+import com.alchemedia.applock.ui.components.AppLogo
 import com.alchemedia.applock.ui.components.Segmented
 
 /** Pick PIN or pattern, enter it, confirm it. Used for first-run setup and for changing the secret. */
@@ -72,7 +72,7 @@ fun CredentialSetup(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        IconTile(painterResource(R.drawable.ic_shield), size = 64.dp)
+        AppLogo(size = 64.dp)
         Spacer(Modifier.height(16.dp))
         Text(stringResource(R.string.setup_title), style = MaterialTheme.typography.headlineMedium)
         Spacer(Modifier.height(4.dp))

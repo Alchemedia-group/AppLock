@@ -70,7 +70,7 @@
     <string name="relock_five_minutes">5 minutes après mon départ</string>
     <string name="relock_screen_off">Quand l’écran s’éteint</string>
     <string name="settings_section_status">État</string>
-    <string name="settings_privacy">AppLock n’a aucune autorisation Internet. Les codes PIN sont stockés uniquement sous forme de hachages salés et les photos ne quittent jamais cet appareil.</string>
+    <string name="settings_privacy">Les codes PIN sont stockés uniquement sous forme de hachages salés. Les photos et ta liste d’applis ne quittent jamais cet appareil. Le réseau n’est utilisé que par Google Play pour l’achat de Pro.</string>
     <string name="onboard_welcome_title">Garde tes applis privées</string>
     <string name="onboard_welcome_body">AppLock place un verrou devant les applis que tu choisis et repère quiconque se trompe.</string>
     <string name="onboard_feature_lock_title">Verrouille n’importe quelle appli</string>
@@ -78,7 +78,7 @@
     <string name="onboard_feature_photo_title">Prends les intrus sur le fait</string>
     <string name="onboard_feature_photo_body">Une photo discrète avec la caméra frontale après un échec.</string>
     <string name="onboard_feature_private_title">Reste sur ton téléphone</string>
-    <string name="onboard_feature_private_body">Aucune autorisation Internet. Rien n’est envoyé.</string>
+    <string name="onboard_feature_private_body">Ton code PIN, tes photos et ta liste d’applis ne quittent jamais cet appareil.</string>
     <string name="onboard_get_started">Commencer</string>
     <string name="onboard_back">Retour</string>
     <string name="onboard_skip">Passer pour l’instant</string>

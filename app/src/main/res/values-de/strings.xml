@@ -70,7 +70,7 @@
     <string name="relock_five_minutes">5 Minuten nach dem Verlassen</string>
     <string name="relock_screen_off">Wenn der Bildschirm ausgeht</string>
     <string name="settings_section_status">Status</string>
-    <string name="settings_privacy">AppLock hat keine Internetberechtigung. PINs werden nur als gesalzene Hashes gespeichert und Fotos verlassen dieses Gerät nie.</string>
+    <string name="settings_privacy">PINs werden nur als gesalzene Hashes gespeichert. Fotos und deine App-Liste verlassen dieses Gerät nie. Das Netzwerk nutzt nur Google Play für den Pro-Kauf.</string>
     <string name="onboard_welcome_title">Halte deine Apps privat</string>
     <string name="onboard_welcome_body">AppLock sperrt die Apps, die du auswählst, und erwischt jeden, der sich vertippt.</string>
     <string name="onboard_feature_lock_title">Jede App sperren</string>
@@ -78,7 +78,7 @@
     <string name="onboard_feature_photo_title">Eindringlinge erwischen</string>
     <string name="onboard_feature_photo_body">Ein unauffälliges Frontkamera-Foto nach einem Fehlversuch.</string>
     <string name="onboard_feature_private_title">Bleibt auf deinem Handy</string>
-    <string name="onboard_feature_private_body">Keine Internetberechtigung. Nichts wird hochgeladen.</string>
+    <string name="onboard_feature_private_body">Deine PIN, Fotos und App-Liste verlassen dieses Gerät nie.</string>
     <string name="onboard_get_started">Los geht’s</string>
     <string name="onboard_back">Zurück</string>
     <string name="onboard_skip">Vorerst überspringen</string>

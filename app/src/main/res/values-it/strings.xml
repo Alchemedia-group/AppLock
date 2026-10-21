@@ -70,7 +70,7 @@
     <string name="relock_five_minutes">5 minuti dopo che esco</string>
     <string name="relock_screen_off">Quando lo schermo si spegne</string>
     <string name="settings_section_status">Stato</string>
-    <string name="settings_privacy">AppLock non ha il permesso di accedere a internet. I PIN sono salvati solo come hash con salt e le foto non lasciano mai questo dispositivo.</string>
+    <string name="settings_privacy">I PIN sono salvati solo come hash con salt. Le foto e l’elenco delle app non lasciano mai questo dispositivo. La rete è usata solo da Google Play per l’acquisto di Pro.</string>
     <string name="onboard_welcome_title">Tieni private le tue app</string>
     <string name="onboard_welcome_body">AppLock mette un blocco davanti alle app che scegli e coglie chiunque sbagli.</string>
     <string name="onboard_feature_lock_title">Blocca qualsiasi app</string>
@@ -78,7 +78,7 @@
     <string name="onboard_feature_photo_title">Cogli gli intrusi</string>
     <string name="onboard_feature_photo_body">Una foto discreta con la fotocamera frontale dopo un tentativo fallito.</string>
     <string name="onboard_feature_private_title">Resta sul tuo telefono</string>
-    <string name="onboard_feature_private_body">Nessun permesso internet. Non viene caricato nulla.</string>
+    <string name="onboard_feature_private_body">PIN, foto ed elenco delle app non lasciano mai questo dispositivo.</string>
     <string name="onboard_get_started">Inizia</string>
     <string name="onboard_back">Indietro</string>
     <string name="onboard_skip">Salta per ora</string>

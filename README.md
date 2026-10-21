@@ -20,7 +20,7 @@ fingerprint screen and **silently photographs anyone who fails to unlock**.
 - **Auto-delete** intruder photos after 7, 30 or 90 days
 - **Backup and restore** of locked apps and preferences as a JSON file. It never contains your PIN, recovery code or photos
 - Lock/overview screens are `FLAG_SECURE` (no screenshots, blank recents thumbnail)
-- No `INTERNET` permission. The secret is stored only as a salted PBKDF2-SHA256 hash
+- Your PIN, photos and app list never leave the device; the secret is stored only as a salted PBKDF2-SHA256 hash. (Google Play Billing's libraries add the network permissions used for the Pro purchase.)
 
 ## AppLock Pro (one-time purchase)
 

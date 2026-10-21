@@ -40,6 +40,7 @@ import com.alchemedia.applock.R
 import com.alchemedia.applock.data.AppSettings
 import com.alchemedia.applock.data.LockType
 import com.alchemedia.applock.ui.components.AppIcon
+import com.alchemedia.applock.ui.components.AppLogo
 import com.alchemedia.applock.ui.components.IconTile
 import com.alchemedia.applock.ui.components.PatternEntry
 import com.alchemedia.applock.ui.components.PinEntry
@@ -98,19 +99,7 @@ fun LockScreen(
                 AppIcon(icon, size = 76.dp, modifier = Modifier.padding(6.dp))
             }
         } else {
-            Box(
-                Modifier
-                    .size(76.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.primaryContainer),
-                contentAlignment = Alignment.Center,
-            ) {
-                IconTile(
-                    painterResource(R.drawable.ic_shield),
-                    background = androidx.compose.ui.graphics.Color.Transparent,
-                    size = 64.dp,
-                )
-            }
+            AppLogo(size = 84.dp)
         }
         Spacer(Modifier.height(20.dp))
         Text(title, style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)

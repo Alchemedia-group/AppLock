@@ -55,6 +55,7 @@ import androidx.compose.ui.unit.sp
 import com.alchemedia.applock.R
 import com.alchemedia.applock.security.RecoveryCode
 import com.alchemedia.applock.security.SetupStatus
+import com.alchemedia.applock.ui.components.AppLogo
 import com.alchemedia.applock.ui.components.GroupCard
 import com.alchemedia.applock.ui.components.IconTile
 import com.alchemedia.applock.ui.components.SettingRow
@@ -134,7 +135,7 @@ private fun WelcomeStep(onStart: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        IconTile(painterResource(R.drawable.ic_shield), size = 84.dp)
+        AppLogo(size = 96.dp)
         Spacer(Modifier.height(24.dp))
         Text(
             stringResource(R.string.onboard_welcome_title),
@@ -195,7 +196,7 @@ fun RecoveryCodeScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        IconTile(painterResource(R.drawable.ic_shield), size = 64.dp)
+        AppLogo(size = 64.dp)
         Spacer(Modifier.height(16.dp))
         Text(stringResource(R.string.recovery_title), style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center)
         Spacer(Modifier.height(8.dp))
@@ -380,7 +381,7 @@ fun RecoverySignIn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        IconTile(painterResource(R.drawable.ic_shield), size = 64.dp)
+        AppLogo(size = 64.dp)
         Spacer(Modifier.height(16.dp))
         Text(stringResource(R.string.recovery_enter_title), style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center)
         Spacer(Modifier.height(8.dp))

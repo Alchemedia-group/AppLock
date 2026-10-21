@@ -62,6 +62,7 @@ class BillingManager(
     val state: StateFlow<BillingUiState> = _state.asStateFlow()
 
     private var productDetails: ProductDetails? = null
+    private var connecting = false
 
     /** Connects to Google Play (safe to call repeatedly), loads the price and re-checks ownership. */
     fun start() {
@@ -69,8 +70,12 @@ class BillingManager(
             scope.launch { refresh() }
             return
         }
+        // The app calls start() every time it opens; don't stack up connection attempts.
+        if (connecting) return
+        connecting = true
         client.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(result: BillingResult) {
+                connecting = false
                 if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                     scope.launch { refresh() }
                 } else {
@@ -80,6 +85,7 @@ class BillingManager(
             }
 
             override fun onBillingServiceDisconnected() {
+                connecting = false
                 _state.update { it.copy(storeReady = false) }
             }
         })

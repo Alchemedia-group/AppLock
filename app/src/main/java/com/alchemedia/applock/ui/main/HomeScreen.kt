@@ -45,6 +45,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.alchemedia.applock.R
 import com.alchemedia.applock.data.AppSettings
+import com.alchemedia.applock.ui.components.AppLogo
 import com.alchemedia.applock.security.RecoveryCode
 
 private enum class Tab(
@@ -127,13 +128,21 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                 .fillMaxSize()
                 .statusBarsPadding(),
         ) {
-            Column(Modifier.padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 12.dp)) {
-                Text(stringResource(current.title), style = MaterialTheme.typography.headlineMedium)
-                Text(
-                    stringResource(current.subtitle),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(current.title), style = MaterialTheme.typography.headlineMedium)
+                    Text(
+                        stringResource(current.subtitle),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+                AppLogo(size = 40.dp)
             }
             val content = Modifier.weight(1f)
             when (current) {
