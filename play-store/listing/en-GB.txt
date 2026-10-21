@@ -1,0 +1,49 @@
+LANGUAGE: English (United Kingdom) (en-GB)
+
+APP NAME (max 30): AppLock - Lock Any App   [22 characters]
+
+SHORT DESCRIPTION (max 80): Lock apps with a PIN, pattern or fingerprint. Photograph anyone who fails.   [74 characters]
+
+FULL DESCRIPTION (max 4000) [2425 characters]:
+Keep your apps private.
+
+AppLock puts a PIN, pattern or fingerprint lock in front of the apps you choose. With AppLock Pro, it also takes a photo of anyone who fails to unlock.
+
+LOCK ANY APP
+• Protect any app with a 4 to 8 digit PIN or a 3×3 pattern
+• Unlock with fingerprint or face using Android's built-in biometric prompt
+• Choose when apps lock again: as soon as you leave, after 1 or 5 minutes, or when the screen turns off
+• Shuffle the PIN keypad so smudges and shoulder-surfers reveal less
+• Input pauses for 30 seconds after five wrong attempts
+• AppLock's own screens are hidden from screenshots and the recent-apps view
+
+STAY IN CONTROL
+• Recovery code: save it during setup, and a forgotten PIN or pattern is not the end of the road
+• Optional fake crash screen: locked apps look like they crashed. Long-press "Close app" to reveal the real lock
+• Optional hidden notifications: locked apps show "New notification" instead of the message
+• Back up and restore your list of locked apps and settings. Your PIN and photos are never included
+• The navigation bar hides itself for a clean, immersive look
+• Available in English, Spanish, German, French, Italian, Portuguese and Polish
+
+APPLOCK PRO: CATCH INTRUDERS (one-time purchase)
+• Take a front-camera photo when someone fails to unlock
+• Choose after how many failed attempts (1 to 5)
+• See every photo with the time and the app they tried to open
+• Share, save or delete photos, or delete them automatically after 7, 30 or 90 days
+• One payment. No subscription
+
+PRIVATE BY DESIGN
+• No account, no ads, no analytics
+• Your PIN is stored only as a salted hash. Photos and your app list never leave your phone
+
+ACCESSIBILITY SERVICE DISCLOSURE
+AppLock uses Android's Accessibility Service for one purpose only: to detect which app has just opened, so it can show your lock screen in front of the apps you chose to protect. It does not read, record or collect anything on your screen, and it does not share any data. You can turn it off at any time in Android Settings, which stops protection. AppLock asks you to agree before it takes you to that setting.
+
+CAMERA
+With AppLock Pro, the camera is used only to take an intruder photo after failed unlock attempts. Photos are stored on your phone.
+
+NOTE
+AppLock adds a layer on top of your phone's own screen lock and does not replace it. Someone who can unlock your phone can also turn off AppLock or uninstall it.
+
+WHAT'S NEW (max 500) [119 characters]:
+First release. Lock any app with a PIN, pattern or fingerprint. AppLock Pro adds a photo of anyone who fails to unlock.

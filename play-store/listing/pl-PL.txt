@@ -1,0 +1,49 @@
+LANGUAGE: Polish (Poland) (pl-PL)
+
+APP NAME (max 30): AppLock - Blokada aplikacji   [27 characters]
+
+SHORT DESCRIPTION (max 80): Blokuj aplikacje PIN-em, wzorem lub palcem. Zdjęcie każdego, komu się nie uda.   [78 characters]
+
+FULL DESCRIPTION (max 4000) [2635 characters]:
+Zachowaj prywatność swoich aplikacji.
+
+AppLock zakłada blokadę PIN-em, wzorem lub odciskiem palca na wybrane aplikacje. Z AppLock Pro robi też zdjęcie każdemu, komu nie uda się odblokować.
+
+ZABLOKUJ DOWOLNĄ APLIKACJĘ
+• Chroń każdą aplikację PIN-em od 4 do 8 cyfr lub wzorem 3×3
+• Odblokowuj odciskiem palca lub twarzą przez wbudowane okno biometryczne Androida
+• Wybierz, kiedy blokować ponownie: zaraz po wyjściu z aplikacji, po 1 lub 5 minutach albo po wyłączeniu ekranu
+• Mieszaj klawiaturę PIN, aby ślady palców i podglądanie zdradzały mniej
+• Po pięciu nieudanych próbach wpisywanie jest wstrzymane na 30 sekund
+• Ekrany AppLock są ukryte na zrzutach ekranu i w widoku ostatnich aplikacji
+
+MIEJ KONTROLĘ
+• Kod odzyskiwania: zapisz go podczas konfiguracji, a zapomniany PIN lub wzór nie będzie końcem drogi
+• Opcjonalny fałszywy ekran awarii: zablokowane aplikacje wyglądają, jakby uległy awarii. Przytrzymaj „Zamknij aplikację”, aby zobaczyć prawdziwą blokadę
+• Opcjonalnie ukryte powiadomienia: zablokowane aplikacje pokazują „Nowe powiadomienie” zamiast wiadomości
+• Kopia zapasowa i przywracanie listy zablokowanych aplikacji oraz ustawień. PIN i zdjęcia nigdy nie są uwzględniane
+• Pasek nawigacji chowa się automatycznie
+• Dostępne po angielsku, hiszpańsku, niemiecku, francusku, włosku, portugalsku i polsku
+
+APPLOCK PRO: PRZYŁAP INTRUZÓW (jednorazowy zakup)
+• Rób zdjęcie przednim aparatem, gdy ktoś nie zdoła odblokować
+• Wybierz, po ilu nieudanych próbach (od 1 do 5)
+• Zobacz każde zdjęcie z godziną i aplikacją, którą ktoś próbował otworzyć
+• Udostępniaj, zapisuj lub usuwaj zdjęcia albo usuwaj je automatycznie po 7, 30 lub 90 dniach
+• Jedna płatność. Bez subskrypcji
+
+PRYWATNOŚĆ OD PODSTAW
+• Bez konta, bez reklam, bez analityki
+• Twój PIN jest przechowywany tylko jako hash z solą. Zdjęcia i lista aplikacji nigdy nie opuszczają telefonu
+
+INFORMACJA O USŁUDZE UŁATWIEŃ DOSTĘPU
+AppLock używa usługi ułatwień dostępu Androida w jednym celu: aby wykryć, która aplikacja została właśnie otwarta, i pokazać ekran blokady nad wybranymi aplikacjami. Nie odczytuje, nie nagrywa i nie zbiera niczego z Twojego ekranu oraz nie udostępnia żadnych danych. Możesz ją wyłączyć w dowolnej chwili w ustawieniach Androida, a ochrona przestanie działać. AppLock prosi o zgodę, zanim przeniesie Cię do tego ustawienia.
+
+APARAT
+W AppLock Pro aparat służy wyłącznie do zrobienia zdjęcia intruza po nieudanych próbach odblokowania. Zdjęcia są zapisywane na Twoim telefonie.
+
+UWAGA
+AppLock dodaje warstwę ochrony do blokady ekranu telefonu i jej nie zastępuje. Kto potrafi odblokować telefon, może też wyłączyć AppLock lub go odinstalować.
+
+WHAT'S NEW (max 500) [142 characters]:
+Pierwsza wersja. Zablokuj dowolną aplikację PIN-em, wzorem lub odciskiem palca. AppLock Pro robi zdjęcie każdemu, komu nie uda się odblokować.

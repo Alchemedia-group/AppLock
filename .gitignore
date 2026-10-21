@@ -13,3 +13,5 @@
 *.keystore
 app/build/
 .kotlin/
+keystore.properties
+release-keys/

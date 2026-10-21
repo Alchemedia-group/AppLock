@@ -1,0 +1,49 @@
+LANGUAGE: French (France) (fr-FR)
+
+APP NAME (max 30): AppLock - Verrouillage d’appli   [30 characters]
+
+SHORT DESCRIPTION (max 80): Verrouille tes applis par code, schéma ou empreinte. Photo de qui échoue.   [73 characters]
+
+FULL DESCRIPTION (max 4000) [2894 characters]:
+Garde tes applis privées.
+
+AppLock place un verrou par code PIN, schéma ou empreinte devant les applis que tu choisis. Avec AppLock Pro, il prend aussi en photo quiconque échoue à déverrouiller.
+
+VERROUILLE N’IMPORTE QUELLE APPLI
+• Protège toute appli avec un code PIN de 4 à 8 chiffres ou un schéma 3×3
+• Déverrouille par empreinte ou visage grâce à l’invite biométrique intégrée d’Android
+• Choisis quand reverrouiller : dès que tu quittes l’appli, après 1 ou 5 minutes, ou quand l’écran s’éteint
+• Mélange le clavier PIN pour que les traces et les regards indiscrets révèlent moins
+• La saisie est suspendue 30 secondes après cinq tentatives échouées
+• Les écrans d’AppLock sont masqués dans les captures d’écran et la vue des applis récentes
+
+GARDE LE CONTRÔLE
+• Code de récupération : enregistre-le lors de la configuration et un code PIN ou un schéma oublié n’est plus une impasse
+• Faux écran de plantage (facultatif) : les applis verrouillées semblent avoir planté. Appuie longuement sur « Fermer l’appli » pour voir le vrai verrou
+• Notifications masquées (facultatif) : les applis verrouillées affichent « Nouvelle notification » au lieu du message
+• Sauvegarde et restauration de ta liste d’applis verrouillées et de tes réglages. Ton code PIN et tes photos ne sont jamais inclus
+• La barre de navigation se masque toute seule
+• Disponible en anglais, espagnol, allemand, français, italien, portugais et polonais
+
+APPLOCK PRO : PRENDS LES INTRUS SUR LE FAIT (achat unique)
+• Prends une photo avec la caméra frontale quand quelqu’un échoue à déverrouiller
+• Choisis après combien de tentatives échouées (de 1 à 5)
+• Consulte chaque photo avec l’heure et l’appli que la personne a tenté d’ouvrir
+• Partage, enregistre ou supprime les photos, ou supprime-les automatiquement après 7, 30 ou 90 jours
+• Un seul paiement. Sans abonnement
+
+PRIVÉ PAR CONCEPTION
+• Pas de compte, pas de publicité, pas d’analyse
+• Ton code PIN n’est stocké que sous forme de hachage salé. Les photos et ta liste d’applis ne quittent jamais ton téléphone
+
+INFORMATION SUR LE SERVICE D’ACCESSIBILITÉ
+AppLock utilise le service d’accessibilité d’Android dans un seul but : détecter quelle appli vient de s’ouvrir afin d’afficher ton écran de verrouillage devant les applis que tu as choisi de protéger. Il ne lit, n’enregistre et ne collecte rien de ton écran et ne partage aucune donnée. Tu peux le désactiver à tout moment dans les réglages d’Android, ce qui arrête la protection. AppLock te demande ton accord avant de t’emmener vers ce réglage.
+
+APPAREIL PHOTO
+Avec AppLock Pro, la caméra sert uniquement à prendre la photo de l’intrus après des échecs de déverrouillage. Les photos sont stockées sur ton téléphone.
+
+REMARQUE
+AppLock ajoute une couche au verrouillage d’écran de ton téléphone et ne le remplace pas. Quiconque peut déverrouiller ton téléphone peut aussi désactiver AppLock ou le désinstaller.
+
+WHAT'S NEW (max 500) [146 characters]:
+Première version. Verrouille n’importe quelle appli par code PIN, schéma ou empreinte. AppLock Pro ajoute une photo de qui échoue à déverrouiller.

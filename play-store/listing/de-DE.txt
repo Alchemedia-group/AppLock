@@ -1,0 +1,49 @@
+LANGUAGE: German (Germany) (de-DE)
+
+APP NAME (max 30): AppLock - Apps sperren   [22 characters]
+
+SHORT DESCRIPTION (max 80): Apps mit PIN, Muster oder Fingerabdruck sperren. Foto von jedem, der scheitert.   [79 characters]
+
+FULL DESCRIPTION (max 4000) [2803 characters]:
+Halte deine Apps privat.
+
+AppLock setzt eine PIN-, Muster- oder Fingerabdrucksperre vor die Apps, die du auswählst. Mit AppLock Pro macht es außerdem ein Foto von jedem, der beim Entsperren scheitert.
+
+JEDE APP SPERREN
+• Schütze jede App mit einer 4- bis 8-stelligen PIN oder einem 3×3-Muster
+• Entsperre per Fingerabdruck oder Gesicht über die in Android integrierte biometrische Abfrage
+• Lege fest, wann erneut gesperrt wird: sobald du die App verlässt, nach 1 oder 5 Minuten oder wenn der Bildschirm ausgeht
+• Mische das PIN-Tastenfeld, damit Fingerabdrücke und neugierige Blicke weniger verraten
+• Nach fünf Fehlversuchen ist die Eingabe 30 Sekunden pausiert
+• Die Bildschirme von AppLock sind in Screenshots und in der Übersicht zuletzt verwendeter Apps verborgen
+
+BEHALTE DIE KONTROLLE
+• Wiederherstellungscode: Speichere ihn bei der Einrichtung, dann ist eine vergessene PIN oder ein vergessenes Muster nicht das Ende
+• Optionaler falscher Absturzbildschirm: Gesperrte Apps sehen aus, als wären sie abgestürzt. Zum Entsperren „App schließen“ lange drücken
+• Optional verborgene Benachrichtigungen: Gesperrte Apps zeigen „Neue Benachrichtigung“ statt der Nachricht
+• Sichere und stelle deine Liste gesperrter Apps und die Einstellungen wieder her. PIN und Fotos sind nie enthalten
+• Die Navigationsleiste blendet sich selbst aus
+• Verfügbar auf Englisch, Spanisch, Deutsch, Französisch, Italienisch, Portugiesisch und Polnisch
+
+APPLOCK PRO: EINDRINGLINGE ERWISCHEN (Einmalkauf)
+• Mache mit der Frontkamera ein Foto, wenn jemand beim Entsperren scheitert
+• Lege fest, nach wie vielen Fehlversuchen (1 bis 5)
+• Sieh jedes Foto mit Uhrzeit und der App, die geöffnet werden sollte
+• Teile, speichere oder lösche Fotos oder lasse sie nach 7, 30 oder 90 Tagen automatisch löschen
+• Eine Zahlung. Kein Abo
+
+PRIVAT VON GRUND AUF
+• Kein Konto, keine Werbung, keine Analysen
+• Deine PIN wird nur als gesalzener Hash gespeichert. Fotos und deine App-Liste verlassen dein Handy nie
+
+HINWEIS ZUM BEDIENUNGSHILFEN-DIENST
+AppLock nutzt den Bedienungshilfen-Dienst von Android nur zu einem Zweck: zu erkennen, welche App gerade geöffnet wurde, um deine Sperre vor den geschützten Apps anzuzeigen. Er liest, speichert oder sammelt nichts von deinem Bildschirm und gibt keine Daten weiter. Du kannst ihn jederzeit in den Android-Einstellungen ausschalten, dann endet der Schutz. AppLock bittet dich um Zustimmung, bevor es dich zu dieser Einstellung führt.
+
+KAMERA
+Mit AppLock Pro wird die Kamera nur für das Eindringlingsfoto nach fehlgeschlagenen Entsperrversuchen genutzt. Die Fotos werden auf deinem Handy gespeichert.
+
+HINWEIS
+AppLock ist eine zusätzliche Schicht über der Bildschirmsperre deines Handys und ersetzt sie nicht. Wer dein Handy entsperren kann, kann auch AppLock ausschalten oder deinstallieren.
+
+WHAT'S NEW (max 500) [135 characters]:
+Erste Version. Sperre jede App mit PIN, Muster oder Fingerabdruck. AppLock Pro macht ein Foto von jedem, der beim Entsperren scheitert.
