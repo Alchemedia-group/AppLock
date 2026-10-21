@@ -202,4 +202,6 @@
         <item quantity="many">%1$d de fotos tiradas</item>
         <item quantity="other">%1$d fotos tiradas</item>
     </plurals>
+    <string name="language_choose_title">Escolhe o teu idioma</string>
+    <string name="language_choose_body">Podes alterá-lo mais tarde nas Definições.</string>
 </resources>

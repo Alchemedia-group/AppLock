@@ -1,5 +1,6 @@
 package com.alchemedia.applock.ui.lock
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -29,6 +30,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.withResumed
 import com.alchemedia.applock.AppLockApp
 import com.alchemedia.applock.R
+import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.intruder.IntruderCamera
 import com.alchemedia.applock.security.UnlockSession
 import com.alchemedia.applock.security.isBiometricAvailable
@@ -46,6 +48,10 @@ class LockActivity : FragmentActivity() {
     private lateinit var camera: IntruderCamera
     private var targetPackage by mutableStateOf<String?>(null)
     private var revealed by mutableStateOf(false)
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageManager.wrap(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

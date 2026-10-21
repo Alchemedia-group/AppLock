@@ -1,10 +1,6 @@
 package com.alchemedia.applock.ui.main
 
-import android.app.LocaleManager
 import android.net.Uri
-import android.os.Build
-import android.os.LocaleList
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,6 +37,7 @@ import com.alchemedia.applock.R
 import com.alchemedia.applock.data.AppSettings
 import com.alchemedia.applock.data.LockType
 import com.alchemedia.applock.data.RelockMode
+import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.security.SetupStatus
 import com.alchemedia.applock.security.isBiometricAvailable
 import com.alchemedia.applock.ui.components.GroupCard
@@ -225,10 +222,8 @@ fun SettingsTab(
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            SectionLabel(stringResource(R.string.settings_section_language))
-            LanguageGroup()
-        }
+        SectionLabel(stringResource(R.string.settings_section_language))
+        LanguageSetting()
 
         SectionLabel(stringResource(R.string.settings_section_relock))
         GroupCard {
@@ -290,41 +285,18 @@ fun SettingsTab(
     }
 }
 
-private val LANGUAGES = listOf(
-    "" to R.string.language_system,
-    "en" to R.string.lang_en,
-    "es" to R.string.lang_es,
-    "de" to R.string.lang_de,
-    "fr" to R.string.lang_fr,
-    "it" to R.string.lang_it,
-    "pt" to R.string.lang_pt,
-    "pl" to R.string.lang_pl,
-)
-
-/** Per-app language: Android 13+ stores the choice and restarts the activity in the new language. */
-@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+/** Language drop-down. Saves the choice and restarts the screen so it applies straight away. */
 @Composable
-private fun LanguageGroup() {
+private fun LanguageSetting() {
     val context = LocalContext.current
-    val manager = remember { context.getSystemService(LocaleManager::class.java) }
-    var selected by remember {
-        mutableStateOf(manager.applicationLocales.let { if (it.isEmpty) "" else it[0].language })
-    }
-    GroupCard {
-        LANGUAGES.forEach { (tag, label) ->
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable(role = Role.RadioButton) {
-                        selected = tag
-                        manager.applicationLocales = if (tag.isEmpty()) LocaleList.getEmptyLocaleList() else LocaleList.forLanguageTags(tag)
-                    }
-                    .padding(horizontal = 12.dp, vertical = 4.dp),
-            ) {
-                RadioButton(selected = selected == tag, onClick = null, modifier = Modifier.padding(12.dp))
-                Text(stringResource(label), style = MaterialTheme.typography.bodyLarge)
-            }
-        }
-    }
+    var tag by remember { mutableStateOf(LanguageManager.tag(context)) }
+    LanguageDropdown(
+        selectedTag = tag,
+        onSelect = { picked ->
+            tag = picked
+            LanguageManager.save(context, picked)
+            (context as? android.app.Activity)?.recreate()
+        },
+        modifier = Modifier.padding(horizontal = 16.dp),
+    )
 }

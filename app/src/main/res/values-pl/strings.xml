@@ -204,4 +204,6 @@
         <item quantity="many">%1$d zrobionych zdjęć</item>
         <item quantity="other">%1$d zrobionego zdjęcia</item>
     </plurals>
+    <string name="language_choose_title">Wybierz język</string>
+    <string name="language_choose_body">Możesz to zmienić później w Ustawieniach.</string>
 </resources>

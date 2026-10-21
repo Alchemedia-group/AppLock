@@ -200,4 +200,6 @@
         <item quantity="one">%1$d Foto aufgenommen</item>
         <item quantity="other">%1$d Fotos aufgenommen</item>
     </plurals>
+    <string name="language_choose_title">Wähle deine Sprache</string>
+    <string name="language_choose_body">Du kannst das später in den Einstellungen ändern.</string>
 </resources>

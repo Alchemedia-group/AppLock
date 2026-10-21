@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.pm.PackageManager
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
@@ -12,6 +13,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.alchemedia.applock.AppLockApp
 import com.alchemedia.applock.R
 import com.alchemedia.applock.data.AppSettings
+import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.security.UnlockSession
 import com.alchemedia.applock.security.canPostNotifications
 import kotlinx.coroutines.CoroutineScope
@@ -30,6 +32,10 @@ class LockedNotificationService : NotificationListenerService() {
 
     @Volatile
     private var settings = AppSettings()
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LanguageManager.wrap(base))
+    }
 
     override fun onListenerConnected() {
         super.onListenerConnected()

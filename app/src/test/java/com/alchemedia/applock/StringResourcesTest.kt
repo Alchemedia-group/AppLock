@@ -93,6 +93,12 @@ class StringResourcesTest {
     }
 
     @Test
+    fun languagePickerOffersExactlyTheTranslatedLanguages() {
+        assertEquals((languages + "en").toSet(), com.alchemedia.applock.i18n.LanguageManager.SUPPORTED.toSet())
+        languages.forEach { assertTrue("values-$it missing", File(res, "values-$it/strings.xml").exists()) }
+    }
+
+    @Test
     fun manifestLocaleConfigListsEveryTranslatedLanguage() {
         val config = File(res, "xml/locales_config.xml").readText()
         (languages + "en").forEach { assertTrue("locales_config missing $it", config.contains("android:name=\"$it\"")) }

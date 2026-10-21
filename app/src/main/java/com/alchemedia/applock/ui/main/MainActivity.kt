@@ -1,5 +1,6 @@
 package com.alchemedia.applock.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.compose.setContent
@@ -11,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
@@ -20,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.alchemedia.applock.AppLockApp
 import com.alchemedia.applock.R
+import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.intruder.IntruderCamera
 import com.alchemedia.applock.ui.lock.LockScreen
 import com.alchemedia.applock.ui.lock.LockViewModel
@@ -33,6 +36,10 @@ class MainActivity : FragmentActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     private val lockViewModel: LockViewModel by viewModels()
     private lateinit var camera: IntruderCamera
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageManager.wrap(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +59,7 @@ class MainActivity : FragmentActivity() {
             AppLockTheme {
                 AppBackdrop {
                     val settings by mainViewModel.settings.collectAsState()
+                    var languageChosen by remember { mutableStateOf(LanguageManager.isChosen(this@MainActivity)) }
                     var recovering by rememberSaveable { mutableStateOf(false) }
                     val lockUi by lockViewModel.ui.collectAsState()
                     val current = settings
@@ -62,6 +70,11 @@ class MainActivity : FragmentActivity() {
                         if (gateShown && captureEnabled) camera.start() else camera.stop()
                     }
                     when {
+                        !languageChosen -> LanguageChooserScreen(onPick = { tag ->
+                            LanguageManager.save(this@MainActivity, tag)
+                            languageChosen = true
+                            recreate()
+                        })
                         current == null -> Unit
                         !current.setupComplete -> OnboardingFlow(mainViewModel)
                         !mainViewModel.authenticated && recovering -> RecoveryFlow(

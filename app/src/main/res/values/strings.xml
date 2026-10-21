@@ -245,4 +245,6 @@
     <string name="lang_it" translatable="false">Italiano</string>
     <string name="lang_pt" translatable="false">Português</string>
     <string name="lang_pl" translatable="false">Polski</string>
+    <string name="language_choose_title">Choose your language</string>
+    <string name="language_choose_body">You can change this later in Settings.</string>
 </resources>
