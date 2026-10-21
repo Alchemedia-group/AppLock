@@ -11,8 +11,11 @@ import java.util.concurrent.ConcurrentHashMap
 object UnlockSession {
     private val unlockedAt = ConcurrentHashMap<String, Long>()
 
+    /** Monotonic milliseconds; replaced in unit tests. */
+    internal var clock: () -> Long = { SystemClock.elapsedRealtime() }
+
     fun markUnlocked(packageName: String) {
-        unlockedAt[packageName] = SystemClock.elapsedRealtime()
+        unlockedAt[packageName] = clock()
     }
 
     fun isUnlocked(packageName: String, mode: RelockMode): Boolean {
@@ -22,7 +25,7 @@ object UnlockSession {
             RelockMode.ONE_MINUTE -> 60_000L
             RelockMode.FIVE_MINUTES -> 300_000L
         }
-        return SystemClock.elapsedRealtime() - at < grace
+        return clock() - at < grace
     }
 
     /** Forget every unlocked app except [packageName] (the one now in the foreground). */

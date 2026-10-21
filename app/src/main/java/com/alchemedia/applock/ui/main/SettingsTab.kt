@@ -1,5 +1,8 @@
 package com.alchemedia.applock.ui.main
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,6 +40,8 @@ import com.alchemedia.applock.ui.components.SectionLabel
 import com.alchemedia.applock.ui.components.Segmented
 import com.alchemedia.applock.ui.components.SettingRow
 
+private val AUTO_DELETE_OPTIONS = listOf(0, 7, 30, 90)
+
 @Composable
 fun SettingsTab(
     settings: AppSettings,
@@ -47,12 +52,27 @@ fun SettingsTab(
     onCapture: (Boolean) -> Unit,
     onAttempts: (Int) -> Unit,
     onRelock: (RelockMode) -> Unit,
+    onFakeCrash: (Boolean) -> Unit,
+    onHideNotifications: (Boolean) -> Unit,
+    onAutoDelete: (Int) -> Unit,
+    onNewRecoveryCode: () -> Unit,
+    onExport: (Uri) -> Unit,
+    onImport: (Uri) -> Unit,
+    backupMessage: Int?,
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
     val biometricAvailable = isBiometricAvailable(context)
     val openAccessibility = openAccessibilitySettings()
     val colors = MaterialTheme.colorScheme
+    val requestNotificationAccess = rememberNotificationAccessRequest(status.notificationListenerEnabled)
+    val notificationsReady = status.notificationListenerEnabled && status.postNotificationsGranted
+    val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
+        if (uri != null) onExport(uri)
+    }
+    val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) onImport(uri)
+    }
 
     Column(
         modifier
@@ -98,6 +118,33 @@ fun SettingsTab(
                     trailing = { Switch(checked = settings.shuffleKeypad, onCheckedChange = onShuffle) },
                 )
             }
+            SettingRow(
+                title = stringResource(R.string.settings_fake_crash),
+                subtitle = stringResource(R.string.settings_fake_crash_hint),
+                trailing = { Switch(checked = settings.fakeCrash, onCheckedChange = onFakeCrash) },
+            )
+        }
+
+        SectionLabel(stringResource(R.string.settings_section_notifications))
+        GroupCard {
+            SettingRow(
+                title = stringResource(R.string.settings_hide_notifications),
+                subtitle = if (settings.hideNotifications && !notificationsReady) {
+                    stringResource(R.string.settings_notifications_needs_access)
+                } else {
+                    stringResource(R.string.settings_hide_notifications_hint)
+                },
+                onClick = if (settings.hideNotifications && !notificationsReady) requestNotificationAccess else null,
+                trailing = {
+                    Switch(
+                        checked = settings.hideNotifications,
+                        onCheckedChange = {
+                            onHideNotifications(it)
+                            if (it) requestNotificationAccess()
+                        },
+                    )
+                },
+            )
         }
 
         SectionLabel(stringResource(R.string.settings_section_intruder))
@@ -118,6 +165,22 @@ fun SettingsTab(
                         options = (1..5).map { it.toString() },
                         selected = settings.attemptsBeforeCapture - 1,
                         onSelect = { onAttempts(it + 1) },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    Text(
+                        stringResource(R.string.settings_auto_delete),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = colors.onSurfaceVariant,
+                    )
+                    Segmented(
+                        options = listOf(
+                            stringResource(R.string.auto_delete_off),
+                            stringResource(R.string.auto_delete_7),
+                            stringResource(R.string.auto_delete_30),
+                            stringResource(R.string.auto_delete_90),
+                        ),
+                        selected = AUTO_DELETE_OPTIONS.indexOf(settings.autoDeleteDays).coerceAtLeast(0),
+                        onSelect = { onAutoDelete(AUTO_DELETE_OPTIONS[it]) },
                         modifier = Modifier.fillMaxWidth(),
                     )
                 }
@@ -142,6 +205,35 @@ fun SettingsTab(
                     RadioButton(selected = settings.relockMode == mode, onClick = null, modifier = Modifier.padding(12.dp))
                     Text(stringResource(label), style = MaterialTheme.typography.bodyLarge)
                 }
+            }
+        }
+
+        SectionLabel(stringResource(R.string.settings_section_backup))
+        GroupCard {
+            SettingRow(
+                title = stringResource(R.string.settings_new_recovery_code),
+                icon = painterResource(R.drawable.ic_shield),
+                onClick = onNewRecoveryCode,
+                trailing = { Text(stringResource(R.string.chevron), style = MaterialTheme.typography.titleLarge, color = colors.onSurfaceVariant) },
+            )
+            SettingRow(
+                title = stringResource(R.string.settings_backup),
+                subtitle = stringResource(R.string.settings_backup_hint),
+                onClick = { exportLauncher.launch("applock-backup.json") },
+                trailing = { Text(stringResource(R.string.chevron), style = MaterialTheme.typography.titleLarge, color = colors.onSurfaceVariant) },
+            )
+            SettingRow(
+                title = stringResource(R.string.settings_restore),
+                onClick = { importLauncher.launch(arrayOf("application/json", "application/octet-stream", "text/plain")) },
+                trailing = { Text(stringResource(R.string.chevron), style = MaterialTheme.typography.titleLarge, color = colors.onSurfaceVariant) },
+            )
+            if (backupMessage != null) {
+                Text(
+                    stringResource(backupMessage),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = colors.primary,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                )
             }
         }
 

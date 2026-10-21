@@ -55,6 +55,7 @@ fun LockScreen(
     onSecret: (String) -> Unit,
     modifier: Modifier = Modifier,
     onBiometric: (() -> Unit)? = null,
+    onForgot: (() -> Unit)? = null,
 ) {
     var secondsLeft by remember { mutableLongStateOf(0L) }
     LaunchedEffect(state.lockedUntil) {
@@ -147,6 +148,12 @@ fun LockScreen(
         if (onBiometric != null) {
             Spacer(Modifier.height(20.dp))
             TextButton(onClick = onBiometric) { Text(stringResource(R.string.use_fingerprint)) }
+        }
+        if (onForgot != null) {
+            Spacer(Modifier.height(8.dp))
+            TextButton(onClick = onForgot) {
+                Text(stringResource(R.string.recovery_forgot), color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
         }
     }
 }

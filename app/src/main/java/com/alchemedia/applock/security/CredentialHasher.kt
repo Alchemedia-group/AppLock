@@ -1,6 +1,6 @@
 package com.alchemedia.applock.security
 
-import android.util.Base64
+import java.util.Base64
 import java.security.MessageDigest
 import java.security.SecureRandom
 import javax.crypto.SecretKeyFactory
@@ -30,7 +30,7 @@ object CredentialHasher {
         return MessageDigest.isEqual(expected, actual)
     }
 
-    fun encode(bytes: ByteArray): String = Base64.encodeToString(bytes, Base64.NO_WRAP)
+    fun encode(bytes: ByteArray): String = Base64.getEncoder().encodeToString(bytes)
 
-    private fun decode(value: String): ByteArray = Base64.decode(value, Base64.NO_WRAP)
+    private fun decode(value: String): ByteArray = Base64.getDecoder().decode(value)
 }

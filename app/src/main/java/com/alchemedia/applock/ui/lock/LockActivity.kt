@@ -45,6 +45,7 @@ class LockActivity : FragmentActivity() {
     private val viewModel: LockViewModel by viewModels()
     private lateinit var camera: IntruderCamera
     private var targetPackage by mutableStateOf<String?>(null)
+    private var revealed by mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +68,8 @@ class LockActivity : FragmentActivity() {
         lifecycleScope.launch {
             val settings = viewModel.settings.filterNotNull().first()
             if (settings.captureIntruders) camera.start()
-            if (settings.biometricEnabled && isBiometricAvailable(this@LockActivity)) {
+            // With the fake crash screen up, a fingerprint prompt would give the game away.
+            if (settings.biometricEnabled && !settings.fakeCrash && isBiometricAvailable(this@LockActivity)) {
                 lifecycle.withResumed { showBiometricPrompt() }
             }
         }
@@ -80,7 +82,13 @@ class LockActivity : FragmentActivity() {
                 val appInfo = remember(target) { target?.let(::loadTargetApp) }
                 val current = settings
                 AppBackdrop {
-                    if (current != null) {
+                    if (current != null && current.fakeCrash && !revealed && target != null) {
+                        FakeCrashScreen(
+                            appLabel = appInfo?.first ?: target,
+                            onClose = ::goHome,
+                            onReveal = { revealed = true },
+                        )
+                    } else if (current != null) {
                         LockScreen(
                             settings = current,
                             state = ui,
@@ -105,6 +113,7 @@ class LockActivity : FragmentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         targetPackage = intent.getStringExtra(EXTRA_PACKAGE)
+        revealed = false
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

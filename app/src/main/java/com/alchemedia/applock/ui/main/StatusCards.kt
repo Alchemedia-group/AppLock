@@ -39,6 +39,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.alchemedia.applock.R
 import com.alchemedia.applock.security.SetupStatus
+import com.alchemedia.applock.security.canPostNotifications
 import com.alchemedia.applock.ui.components.IconTile
 
 /** Permission/service status that re-reads whenever the app returns to the foreground. */
@@ -54,6 +55,23 @@ fun rememberSetupStatus(): State<SetupStatus> {
 fun openAccessibilitySettings(): () -> Unit {
     val context = LocalContext.current
     return { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }
+}
+
+/** Asks for POST_NOTIFICATIONS where needed, then sends the user to the notification-access screen. */
+@Composable
+fun rememberNotificationAccessRequest(listenerEnabled: Boolean): () -> Unit {
+    val context = LocalContext.current
+    val openListenerSettings = { context.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
+        if (!listenerEnabled) openListenerSettings()
+    }
+    return {
+        if (!canPostNotifications(context)) {
+            launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        } else if (!listenerEnabled) {
+            openListenerSettings()
+        }
+    }
 }
 
 @Composable

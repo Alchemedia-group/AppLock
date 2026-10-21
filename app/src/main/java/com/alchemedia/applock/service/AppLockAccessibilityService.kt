@@ -17,7 +17,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Watches window changes to learn which app is in the foreground and raises [LockActivity] over
@@ -48,6 +50,12 @@ class AppLockAccessibilityService : AccessibilityService() {
         imePackages = loadImePackages()
         scope.launch {
             (application as AppLockApp).settingsRepository.settings.collect { settings = it }
+        }
+        scope.launch {
+            // Housekeeping at connect time, so old photos go even if the app itself is rarely opened.
+            val app = application as AppLockApp
+            val days = app.settingsRepository.settings.first().autoDeleteDays
+            withContext(Dispatchers.IO) { app.intruderRepository.purgeOlderThan(days) }
         }
         if (!receiverRegistered) {
             val filter = IntentFilter().apply {

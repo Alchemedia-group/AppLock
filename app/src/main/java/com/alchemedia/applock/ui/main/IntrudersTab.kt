@@ -1,6 +1,13 @@
 package com.alchemedia.applock.ui.main
 
 import android.content.Context
+import android.content.Intent
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -69,6 +76,24 @@ fun IntrudersTab(
     var confirmDeleteAll by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val colors = MaterialTheme.colorScheme
+    val scope = rememberCoroutineScope()
+    var pendingSave by remember { mutableStateOf<IntruderShot?>(null) }
+    val saveLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("image/jpeg")) { uri ->
+        val shot = pendingSave
+        pendingSave = null
+        if (uri != null && shot != null) {
+            scope.launch {
+                val ok = withContext(Dispatchers.IO) {
+                    runCatching {
+                        context.contentResolver.openOutputStream(uri)?.use { out ->
+                            shot.file.inputStream().use { it.copyTo(out) }
+                        } != null
+                    }.getOrDefault(false)
+                }
+                Toast.makeText(context, if (ok) R.string.intruder_saved else R.string.intruder_save_failed, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     fun labelFor(shot: IntruderShot): String {
         val pkg = shot.packageName ?: return context.getString(R.string.intruder_unknown_app)
@@ -205,6 +230,13 @@ fun IntrudersTab(
                 )
                 Text(formatTime(context, shot.timestamp), color = Color.LightGray, style = MaterialTheme.typography.bodyMedium)
                 Row(Modifier.padding(top = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    FilledTonalButton(onClick = { shareShot(context, shot, labelFor(shot)) }) { Text(stringResource(R.string.intruder_share)) }
+                    FilledTonalButton(onClick = {
+                        pendingSave = shot
+                        saveLauncher.launch("applock-intruder-${shot.timestamp}.jpg")
+                    }) { Text(stringResource(R.string.intruder_save)) }
+                }
+                Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     FilledTonalButton(onClick = { open = null }) { Text(stringResource(R.string.intruder_close)) }
                     Button(
                         onClick = {
@@ -217,6 +249,17 @@ fun IntrudersTab(
             }
         }
     }
+}
+
+/** Hands the photo to the system share sheet through the FileProvider (never a raw file path). */
+private fun shareShot(context: Context, shot: IntruderShot, appLabel: String) {
+    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", shot.file)
+    val send = Intent(Intent.ACTION_SEND)
+        .setType("image/jpeg")
+        .putExtra(Intent.EXTRA_STREAM, uri)
+        .putExtra(Intent.EXTRA_TEXT, context.getString(R.string.intruder_share_text, appLabel))
+        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    context.startActivity(Intent.createChooser(send, context.getString(R.string.intruder_share_chooser)))
 }
 
 @Composable

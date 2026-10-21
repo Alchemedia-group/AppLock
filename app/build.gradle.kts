@@ -60,4 +60,8 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.biometric)
     implementation(libs.androidx.exifinterface)
+
+    testImplementation(libs.junit)
+    // android.jar only ships stubs for org.json, so unit tests need a real implementation.
+    testImplementation(libs.org.json)
 }

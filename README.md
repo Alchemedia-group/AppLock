@@ -12,6 +12,13 @@ fingerprint screen and **silently photographs anyone who fails to unlock**.
 - **Navigation bar auto-hides** on every screen (swipe from the edge to reveal it briefly) — see `ImmersiveMode`
 - Relock policy: as soon as you leave the app, after 1 / 5 minutes, or when the screen turns off
 - Optional shuffled PIN keypad, 30-second lockout after every 5 wrong attempts
+- **Onboarding**: welcome, choose a PIN or pattern, save a recovery code, then grant the service, camera and notification access
+- **Recovery code**: a one-time 12-character code (stored only as a salted hash) resets a forgotten PIN or pattern from the lock screen, and can be regenerated in Settings. Wrong codes count as failed attempts and trigger the intruder photo
+- **Fake crash screen** (optional): locked apps look like they crashed with "keeps stopping". Long-press *Close app* to reveal the real lock
+- **Hidden notifications** (optional): notifications from locked apps are replaced with "New notification" (needs notification access)
+- **Share and save intruder photos** from the viewer, through the system share sheet or a file you choose
+- **Auto-delete** intruder photos after 7, 30 or 90 days
+- **Backup and restore** of locked apps and preferences as a JSON file. It never contains your PIN, recovery code or photos
 - Lock/overview screens are `FLAG_SECURE` (no screenshots, blank recents thumbnail)
 - No `INTERNET` permission. The secret is stored only as a salted PBKDF2-SHA256 hash
 
@@ -32,7 +39,8 @@ Kotlin 2.4, Jetpack Compose (Material 3), CameraX 1.6, AndroidX Biometric, DataS
 Requires JDK 17+ and the Android SDK (platform 37).
 
 ```
-./gradlew assembleDebug
+./gradlew testDebugUnitTest   # unit tests
+./gradlew assembleDebug        # app/build/outputs/apk/debug/app-debug.apk
 ```
 
 ## First run
@@ -49,4 +57,5 @@ Requires JDK 17+ and the Android SDK (platform 37).
 - Someone who knows your device PIN can disable the accessibility service or uninstall AppLock. A device-admin
   uninstall guard is not implemented yet.
 - Google Play restricts accessibility-service apps; publishing there needs a Permissions Declaration.
-- Not yet built or run on a device: this code was written without an Android SDK available.
+- Built and unit-tested on a build machine only; not yet exercised on a physical device or emulator.
+- Hiding notifications works by dismissing the original and posting a placeholder, so the original's quick actions are lost until you open the app.

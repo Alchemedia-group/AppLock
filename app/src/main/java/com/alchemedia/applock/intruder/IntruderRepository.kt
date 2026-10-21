@@ -29,6 +29,16 @@ class IntruderRepository(context: Context) {
         refresh()
     }
 
+    /** Deletes photos older than [days] days (no-op for 0). Returns how many were removed. */
+    fun purgeOlderThan(days: Int, now: Long = System.currentTimeMillis()): Int {
+        if (days <= 0) return 0
+        val cutoff = now - days * DAY_MS
+        val old = readShots().filter { it.timestamp < cutoff }
+        old.forEach { it.file.delete() }
+        if (old.isNotEmpty()) refresh()
+        return old.size
+    }
+
     fun deleteAll() {
         dir.listFiles()?.forEach { it.delete() }
         refresh()
@@ -47,5 +57,6 @@ class IntruderRepository(context: Context) {
 
     private companion object {
         const val NO_PACKAGE = "applock"
+        const val DAY_MS = 24L * 60 * 60 * 1000
     }
 }

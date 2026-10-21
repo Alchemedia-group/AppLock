@@ -23,7 +23,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -43,6 +45,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.alchemedia.applock.R
 import com.alchemedia.applock.data.AppSettings
+import com.alchemedia.applock.security.RecoveryCode
 
 private enum class Tab(
     val label: Int,
@@ -59,14 +62,23 @@ private enum class Tab(
 fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var changingCredential by rememberSaveable { mutableStateOf(false) }
+    var newRecoveryCode by rememberSaveable { mutableStateOf<String?>(null) }
 
     val apps by viewModel.apps.collectAsState()
     val shots by viewModel.shots.collectAsState()
     val statusState = rememberSetupStatus()
     val status by statusState
 
+    val autoDeleteDays by rememberUpdatedState(settings.autoDeleteDays)
+    val backupMessage by viewModel.backupMessage.collectAsState()
+
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         viewModel.loadApps()
+        viewModel.purgeOldShots(autoDeleteDays)
+        viewModel.refreshShots()
+    }
+    LaunchedEffect(settings.autoDeleteDays) {
+        viewModel.purgeOldShots(settings.autoDeleteDays)
         viewModel.refreshShots()
     }
 
@@ -77,6 +89,18 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                 changingCredential = false
             },
             onCancel = { changingCredential = false },
+        )
+        return
+    }
+
+    newRecoveryCode?.let { code ->
+        RecoveryCodeScreen(
+            code = code,
+            onSaved = {
+                viewModel.saveRecoveryCode(code)
+                newRecoveryCode = null
+            },
+            onCancel = { newRecoveryCode = null },
         )
         return
     }
@@ -120,13 +144,23 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                     onCapture = { viewModel.setCaptureIntruders(it) },
                     onAttempts = { viewModel.setAttemptsBeforeCapture(it) },
                     onRelock = { viewModel.setRelockMode(it) },
+                    onFakeCrash = { viewModel.setFakeCrash(it) },
+                    onHideNotifications = { viewModel.setHideNotifications(it) },
+                    onAutoDelete = { viewModel.setAutoDeleteDays(it) },
+                    onNewRecoveryCode = { newRecoveryCode = RecoveryCode.generate() },
+                    onExport = { viewModel.exportBackup(it) },
+                    onImport = { viewModel.importBackup(it) },
+                    backupMessage = backupMessage,
                     modifier = content,
                 )
             }
         }
         // Floats over the lists, which keep bottom padding so the last row can scroll clear of it.
         Box(Modifier.align(Alignment.BottomCenter)) {
-            FloatingNav(selected = tab, onSelect = { tab = it })
+            FloatingNav(selected = tab, onSelect = {
+                tab = it
+                viewModel.clearBackupMessage()
+            })
         }
     }
 }

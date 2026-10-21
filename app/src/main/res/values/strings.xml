@@ -99,4 +99,84 @@
     <string name="relock_screen_off">When the screen turns off</string>
     <string name="settings_section_status">Status</string>
     <string name="settings_privacy">AppLock has no internet permission. PINs are stored only as salted hashes and photos never leave this device.</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_welcome_title">Keep your apps private</string>
+    <string name="onboard_welcome_body">AppLock puts a lock in front of the apps you choose and catches anyone who guesses wrong.</string>
+    <string name="onboard_feature_lock_title">Lock any app</string>
+    <string name="onboard_feature_lock_body">PIN, pattern or fingerprint before a protected app opens.</string>
+    <string name="onboard_feature_photo_title">Catch intruders</string>
+    <string name="onboard_feature_photo_body">A quiet front-camera photo after a failed attempt.</string>
+    <string name="onboard_feature_private_title">Stays on your phone</string>
+    <string name="onboard_feature_private_body">No internet permission. Nothing is uploaded.</string>
+    <string name="onboard_get_started">Get started</string>
+    <string name="onboard_continue">Continue</string>
+    <string name="onboard_back">Back</string>
+    <string name="onboard_skip">Skip for now</string>
+    <string name="onboard_finish">Finish setup</string>
+    <string name="onboard_permissions_title">Allow what AppLock needs</string>
+    <string name="onboard_permissions_body">Protection needs the AppLock service. The rest is optional and can be changed later.</string>
+    <string name="perm_service_title">AppLock service</string>
+    <string name="perm_service_body">Detects when a protected app opens. Required.</string>
+    <string name="perm_camera_title">Camera</string>
+    <string name="perm_camera_body">Takes the intruder photo.</string>
+    <string name="perm_notifications_title">Hide notification contents</string>
+    <string name="perm_notifications_body">Shows "New notification" instead of the message from locked apps.</string>
+    <string name="perm_granted">On</string>
+    <string name="perm_enable">Enable</string>
+    <string name="perm_restricted_hint">If the switch is greyed out: App info, menu, Allow restricted settings.</string>
+
+    <!-- Recovery -->
+    <string name="recovery_title">Save your recovery code</string>
+    <string name="recovery_body">If you forget your PIN or pattern, this code is the only way back in. It is shown once. Write it down or store it somewhere safe.</string>
+    <string name="recovery_copy">Copy code</string>
+    <string name="recovery_copied">Copied</string>
+    <string name="recovery_saved">I have saved it</string>
+    <string name="recovery_forgot">Forgot PIN or pattern?</string>
+    <string name="recovery_enter_title">Enter your recovery code</string>
+    <string name="recovery_enter_body">Type the 12-character code you saved during setup.</string>
+    <string name="recovery_code_label">Recovery code</string>
+    <string name="recovery_verify">Verify</string>
+    <string name="recovery_wrong">That code doesn\'t match.</string>
+    <string name="recovery_new_credential">Code accepted. Choose a new PIN or pattern.</string>
+    <string name="recovery_new_code_notice">Your old code stops working once you create a new one.</string>
+
+    <!-- Fake crash -->
+    <string name="fake_crash_title">%1$s keeps stopping</string>
+    <string name="fake_crash_app_info">App info</string>
+    <string name="fake_crash_close">Close app</string>
+    <string name="settings_fake_crash">Fake crash screen</string>
+    <string name="settings_fake_crash_hint">Locked apps look like they crashed. Long-press "Close app" to unlock.</string>
+
+    <!-- Notifications -->
+    <string name="hidden_notification_text">New notification</string>
+    <string name="hidden_notification_channel">Hidden notifications</string>
+    <string name="settings_section_notifications">Notifications</string>
+    <string name="settings_hide_notifications">Hide notifications from locked apps</string>
+    <string name="settings_hide_notifications_hint">Replaces their content with "New notification".</string>
+    <string name="settings_notifications_needs_access">Allow notification access to finish turning this on.</string>
+
+    <!-- Photos: share, save, auto delete -->
+    <string name="intruder_share">Share</string>
+    <string name="intruder_save">Save</string>
+    <string name="intruder_saved">Photo saved</string>
+    <string name="intruder_save_failed">Couldn\'t save the photo</string>
+    <string name="intruder_share_text">Intruder photo: someone tried to open %1$s</string>
+    <string name="intruder_share_chooser">Share intruder photo</string>
+    <string name="settings_auto_delete">Delete photos automatically</string>
+    <string name="auto_delete_off">Off</string>
+    <string name="auto_delete_7">7 days</string>
+    <string name="auto_delete_30">30 days</string>
+    <string name="auto_delete_90">90 days</string>
+
+    <!-- Backup -->
+    <string name="settings_section_backup">Backup and recovery</string>
+    <string name="settings_new_recovery_code">Create a new recovery code</string>
+    <string name="settings_backup">Back up settings</string>
+    <string name="settings_backup_hint">Saves which apps are locked and your preferences. Your PIN and photos are not included.</string>
+    <string name="settings_restore">Restore settings</string>
+    <string name="backup_saved">Backup saved</string>
+    <string name="backup_restored">Settings restored</string>
+    <string name="backup_failed">Couldn\'t save the backup</string>
+    <string name="backup_invalid">That file isn\'t an AppLock backup</string>
 </resources>

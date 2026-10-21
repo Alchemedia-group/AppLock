@@ -16,4 +16,11 @@ data class AppSettings(
     val attemptsBeforeCapture: Int = 1,
     val relockMode: RelockMode = RelockMode.IMMEDIATE,
     val shuffleKeypad: Boolean = false,
+    /** Base64 PBKDF2 hash of the one-time recovery code; null if none has been created. */
+    val recoveryHash: String? = null,
+    val recoverySalt: String? = null,
+    val fakeCrash: Boolean = false,
+    val hideNotifications: Boolean = false,
+    /** Delete intruder photos older than this many days; 0 keeps them forever. */
+    val autoDeleteDays: Int = 0,
 )
