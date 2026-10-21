@@ -11,8 +11,12 @@ data class IntruderShot(val file: File, val timestamp: Long, val packageName: St
  * Intruder photos live in app-private storage. The file name carries the metadata
  * (`<epochMillis>-<package>.jpg`) so no separate index can get out of sync.
  */
-class IntruderRepository(context: Context) {
-    private val dir = File(context.filesDir, "intruders").apply { mkdirs() }
+class IntruderRepository(private val dir: File) {
+    constructor(context: Context) : this(File(context.filesDir, "intruders"))
+
+    init {
+        dir.mkdirs()
+    }
 
     private val _shots = MutableStateFlow(readShots())
     val shots: StateFlow<List<IntruderShot>> = _shots

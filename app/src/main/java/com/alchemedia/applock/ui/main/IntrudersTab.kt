@@ -76,6 +76,7 @@ fun IntrudersTab(
     var confirmDeleteAll by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val colors = MaterialTheme.colorScheme
+    val unknownApp = stringResource(R.string.intruder_unknown_app)
     val scope = rememberCoroutineScope()
     var pendingSave by remember { mutableStateOf<IntruderShot?>(null) }
     val saveLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("image/jpeg")) { uri ->
@@ -96,7 +97,7 @@ fun IntrudersTab(
     }
 
     fun labelFor(shot: IntruderShot): String {
-        val pkg = shot.packageName ?: return context.getString(R.string.intruder_unknown_app)
+        val pkg = shot.packageName ?: return unknownApp
         return try {
             val pm = context.packageManager
             pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString()

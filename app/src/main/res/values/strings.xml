@@ -62,9 +62,7 @@
 
     <!-- Apps tab -->
     <string name="search_apps">Search apps</string>
-    <string name="apps_locked_count">%1$d locked</string>
     <string name="apps_empty">No apps found</string>
-    <string name="permission_accessibility_title">Turn on the AppLock service</string>
     <string name="permission_accessibility_body">AppLock needs its accessibility service to detect when a protected app opens. If the switch is greyed out, open AppLock\'s App info, tap ⋮ and choose "Allow restricted settings".</string>
     <string name="permission_accessibility_action">Open settings</string>
     <string name="permission_camera_title">Allow camera for intruder photos</string>
@@ -110,7 +108,6 @@
     <string name="onboard_feature_private_title">Stays on your phone</string>
     <string name="onboard_feature_private_body">No internet permission. Nothing is uploaded.</string>
     <string name="onboard_get_started">Get started</string>
-    <string name="onboard_continue">Continue</string>
     <string name="onboard_back">Back</string>
     <string name="onboard_skip">Skip for now</string>
     <string name="onboard_finish">Finish setup</string>
@@ -138,7 +135,6 @@
     <string name="recovery_code_label">Recovery code</string>
     <string name="recovery_verify">Verify</string>
     <string name="recovery_wrong">That code doesn\'t match.</string>
-    <string name="recovery_new_credential">Code accepted. Choose a new PIN or pattern.</string>
     <string name="recovery_new_code_notice">Your old code stops working once you create a new one.</string>
 
     <!-- Fake crash -->

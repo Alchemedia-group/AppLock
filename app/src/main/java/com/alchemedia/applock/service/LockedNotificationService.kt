@@ -1,6 +1,5 @@
 package com.alchemedia.applock.service
 
-import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,11 +9,11 @@ import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 import com.alchemedia.applock.AppLockApp
 import com.alchemedia.applock.R
 import com.alchemedia.applock.data.AppSettings
 import com.alchemedia.applock.security.UnlockSession
+import com.alchemedia.applock.security.canPostNotifications
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -88,11 +87,8 @@ class LockedNotificationService : NotificationListenerService() {
         return n.category != Notification.CATEGORY_CALL && n.category != Notification.CATEGORY_ALARM
     }
 
-    private fun canPost(): Boolean {
-        if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) return false
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED ||
-            android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU
-    }
+    private fun canPost(): Boolean =
+        NotificationManagerCompat.from(this).areNotificationsEnabled() && canPostNotifications(this)
 
     private fun createChannel() {
         val channel = NotificationChannel(CHANNEL_ID, getString(R.string.hidden_notification_channel), NotificationManager.IMPORTANCE_DEFAULT)

@@ -23,6 +23,7 @@
     <application
         android:name=".AppLockApp"
         android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -44,7 +45,6 @@
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:taskAffinity="" />
 
         <service

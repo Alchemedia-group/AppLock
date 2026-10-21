@@ -1,6 +1,5 @@
 package com.alchemedia.applock.intruder
 
-import android.content.Context
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -8,23 +7,17 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import java.io.File
-import java.lang.reflect.Proxy
 
 class IntruderRepositoryTest {
     @get:Rule
     val tmp = TemporaryFolder()
 
     private val day = 24L * 60 * 60 * 1000
-    private val now = 100 * day
+    private val now = 1000 * day
 
-    /** Minimal Context double: the repository only asks for filesDir. */
     private fun repo(): Pair<IntruderRepository, File> {
-        val files = tmp.newFolder("files")
-        val context = Proxy.newProxyInstance(
-            Context::class.java.classLoader,
-            arrayOf(Context::class.java),
-        ) { _, method, _ -> if (method.name == "getFilesDir") files else null } as Context
-        return IntruderRepository(context) to File(files, "intruders")
+        val dir = File(tmp.newFolder("files"), "intruders")
+        return IntruderRepository(dir) to dir
     }
 
     private fun photo(dir: File, ageDays: Long, pkg: String = "com.bank") =
