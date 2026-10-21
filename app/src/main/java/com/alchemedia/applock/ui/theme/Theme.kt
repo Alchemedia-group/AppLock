@@ -20,33 +20,34 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// Deep blue-black surfaces with one electric-blue accent. Alerts use a warm coral so intruder
-// events read as different from "on" states at a glance.
+// Deep green-black surfaces with one mint accent. Alerts stay a warm coral so intruder events read as
+// different from "on" states at a glance.
 private val DarkColors: ColorScheme = darkColorScheme(
-    primary = Color(0xFF6EA8FF),
-    onPrimary = Color(0xFF05213F),
-    primaryContainer = Color(0xFF14315C),
-    onPrimaryContainer = Color(0xFFD8E7FF),
-    secondary = Color(0xFF8FA3C2),
-    onSecondary = Color(0xFF0B1424),
+    primary = Color(0xFF3DDC97),
+    onPrimary = Color(0xFF03261A),
+    primaryContainer = Color(0xFF0F3A2A),
+    onPrimaryContainer = Color(0xFFC9F7E0),
+    secondary = Color(0xFF8FB8A5),
+    onSecondary = Color(0xFF07140E),
     tertiary = Color(0xFFFF7A88),
-    background = Color(0xFF070C16),
-    onBackground = Color(0xFFE8EEF9),
-    surface = Color(0xFF0D1422),
-    onSurface = Color(0xFFE8EEF9),
-    surfaceVariant = Color(0xFF1A2540),
-    onSurfaceVariant = Color(0xFF93A3BD),
-    surfaceContainerLowest = Color(0xFF070C16),
-    surfaceContainerLow = Color(0xFF0E1525),
-    surfaceContainer = Color(0xFF121B2E),
-    surfaceContainerHigh = Color(0xFF192540),
-    surfaceContainerHighest = Color(0xFF22304F),
-    outline = Color(0xFF3B4B6B),
-    outlineVariant = Color(0xFF243250),
+    background = Color(0xFF040B08),
+    onBackground = Color(0xFFE4F2EB),
+    surface = Color(0xFF0A1511),
+    onSurface = Color(0xFFE4F2EB),
+    surfaceVariant = Color(0xFF14261F),
+    onSurfaceVariant = Color(0xFF8DA89B),
+    surfaceContainerLowest = Color(0xFF040B08),
+    surfaceContainerLow = Color(0xFF0A1410),
+    surfaceContainer = Color(0xFF0E1B16),
+    surfaceContainerHigh = Color(0xFF14261F),
+    surfaceContainerHighest = Color(0xFF1B332A),
+    outline = Color(0xFF3A5A4C),
+    outlineVariant = Color(0xFF1F382E),
     error = Color(0xFFFF7A88),
     onError = Color(0xFF3F0710),
     errorContainer = Color(0xFF4A1620),
@@ -54,26 +55,26 @@ private val DarkColors: ColorScheme = darkColorScheme(
 )
 
 private val LightColors: ColorScheme = lightColorScheme(
-    primary = Color(0xFF2563EB),
+    primary = Color(0xFF0A8F5C),
     onPrimary = Color(0xFFFFFFFF),
-    primaryContainer = Color(0xFFDCE8FF),
-    onPrimaryContainer = Color(0xFF0B2A66),
-    secondary = Color(0xFF52627C),
+    primaryContainer = Color(0xFFCDF3E0),
+    onPrimaryContainer = Color(0xFF04301F),
+    secondary = Color(0xFF4C6B5C),
     onSecondary = Color(0xFFFFFFFF),
     tertiary = Color(0xFFD92D3F),
-    background = Color(0xFFF2F5FB),
-    onBackground = Color(0xFF0B1220),
+    background = Color(0xFFEFF7F3),
+    onBackground = Color(0xFF08140F),
     surface = Color(0xFFFFFFFF),
-    onSurface = Color(0xFF0B1220),
-    surfaceVariant = Color(0xFFE3EAF5),
-    onSurfaceVariant = Color(0xFF5A6A84),
+    onSurface = Color(0xFF08140F),
+    surfaceVariant = Color(0xFFDDEBE4),
+    onSurfaceVariant = Color(0xFF55705F),
     surfaceContainerLowest = Color(0xFFFFFFFF),
-    surfaceContainerLow = Color(0xFFF8FAFE),
+    surfaceContainerLow = Color(0xFFF6FAF8),
     surfaceContainer = Color(0xFFFFFFFF),
-    surfaceContainerHigh = Color(0xFFE9EFF9),
-    surfaceContainerHighest = Color(0xFFDDE6F4),
-    outline = Color(0xFF8FA0BB),
-    outlineVariant = Color(0xFFD3DCEA),
+    surfaceContainerHigh = Color(0xFFE1EEE8),
+    surfaceContainerHighest = Color(0xFFD4E5DC),
+    outline = Color(0xFF8AA597),
+    outlineVariant = Color(0xFFCBDDD3),
     error = Color(0xFFD92D3F),
     onError = Color(0xFFFFFFFF),
     errorContainer = Color(0xFFFFDDE0),
@@ -96,7 +97,8 @@ private val AppTypography = Typography(
     titleLarge = Base.titleLarge.copy(fontWeight = FontWeight.SemiBold),
     titleMedium = Base.titleMedium.copy(fontWeight = FontWeight.SemiBold),
     titleSmall = Base.titleSmall.copy(fontWeight = FontWeight.SemiBold),
-    labelMedium = Base.labelMedium.copy(fontWeight = FontWeight.SemiBold, letterSpacing = 1.1.sp),
+    // Monospace labels give the screens a terminal-readout feel.
+    labelMedium = Base.labelMedium.copy(fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Medium, letterSpacing = 1.2.sp),
     labelLarge = Base.labelLarge.copy(fontWeight = FontWeight.SemiBold),
     bodyLarge = Base.bodyLarge.copy(fontSize = 16.sp),
     bodySmall = Base.bodySmall.copy(lineHeight = 18.sp),
@@ -112,7 +114,7 @@ fun AppLockTheme(content: @Composable () -> Unit) {
     )
 }
 
-/** Page background: the base colour with a soft accent glow from the top-right corner. */
+/** Page background: base colour, a soft mint glow from the top-right corner and a faint dot grid. */
 @Composable
 fun AppBackdrop(modifier: Modifier = Modifier, content: @Composable BoxScope.() -> Unit) {
     val colors = MaterialTheme.colorScheme
@@ -130,9 +132,19 @@ fun AppBackdrop(modifier: Modifier = Modifier, content: @Composable BoxScope.() 
                             radius = size.width * 1.15f,
                         ),
                     )
+                    val step = 26.dp.toPx()
+                    val dot = glow.copy(alpha = 0.07f)
+                    var y = step / 2
+                    while (y < size.height) {
+                        var x = step / 2
+                        while (x < size.width) {
+                            drawCircle(dot, radius = 1.1.dp.toPx(), center = Offset(x, y))
+                            x += step
+                        }
+                        y += step
+                    }
                 },
             content = content,
         )
     }
 }
-
