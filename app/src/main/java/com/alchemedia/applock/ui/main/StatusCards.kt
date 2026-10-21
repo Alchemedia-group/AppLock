@@ -21,6 +21,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -87,6 +88,7 @@ fun ProtectionHero(
     active: Boolean,
     lockedCount: Int,
     onTurnOn: () -> Unit,
+    onHelp: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val colors = MaterialTheme.colorScheme
@@ -138,15 +140,11 @@ fun ProtectionHero(
             if (!active) {
                 Spacer(Modifier.height(16.dp))
                 Button(
-                    onClick = onTurnOn,
+                    onClick = onHelp,
                     colors = ButtonDefaults.buttonColors(containerColor = colors.error, contentColor = colors.onError),
-                ) { Text(stringResource(R.string.permission_accessibility_action)) }
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    stringResource(R.string.permission_accessibility_body),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = colors.onSurfaceVariant,
-                )
+                ) { Text(stringResource(R.string.help_link)) }
+                Spacer(Modifier.height(4.dp))
+                TextButton(onClick = onTurnOn) { Text(stringResource(R.string.permission_accessibility_action)) }
             }
         }
     }

@@ -47,6 +47,7 @@ fun SettingsTab(
     settings: AppSettings,
     status: SetupStatus,
     onChangeCredential: () -> Unit,
+    onHelp: () -> Unit,
     onBiometric: (Boolean) -> Unit,
     onShuffle: (Boolean) -> Unit,
     onCapture: (Boolean) -> Unit,
@@ -90,6 +91,14 @@ fun SettingsTab(
                     }
                 },
             )
+            if (!status.accessibilityEnabled) {
+                SettingRow(
+                    title = stringResource(R.string.help_link),
+                    subtitle = stringResource(R.string.help_how_to_enable),
+                    onClick = onHelp,
+                    trailing = { Text(stringResource(R.string.chevron), style = MaterialTheme.typography.titleLarge, color = colors.onSurfaceVariant) },
+                )
+            }
         }
 
         SectionLabel(stringResource(R.string.settings_section_lock))

@@ -47,6 +47,7 @@ fun AppsTab(
     apps: List<AppEntry>?,
     status: SetupStatus,
     onToggle: (String, Boolean) -> Unit,
+    onHelp: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var query by remember { mutableStateOf("") }
@@ -71,6 +72,7 @@ fun AppsTab(
                 active = status.accessibilityEnabled,
                 lockedCount = settings.lockedPackages.size,
                 onTurnOn = openAccessibility,
+                onHelp = onHelp,
             )
         }
         if (settings.captureIntruders && !status.cameraGranted) {

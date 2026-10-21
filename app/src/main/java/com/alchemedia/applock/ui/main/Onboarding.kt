@@ -66,6 +66,12 @@ private const val STEP_COUNT = 4
 fun OnboardingFlow(viewModel: MainViewModel) {
     var step by rememberSaveable { mutableIntStateOf(0) }
     var recoveryCode by rememberSaveable { mutableStateOf(RecoveryCode.generate()) }
+    var showGuide by rememberSaveable { mutableStateOf(false) }
+
+    if (showGuide) {
+        SetupGuideScreen(onClose = { showGuide = false })
+        return
+    }
 
     Box(Modifier.fillMaxSize()) {
         when (step) {
@@ -86,6 +92,7 @@ fun OnboardingFlow(viewModel: MainViewModel) {
             )
             else -> PermissionsStep(
                 onEnableNotifications = { viewModel.setHideNotifications(true) },
+                onHelp = { showGuide = true },
                 onFinish = { viewModel.completeSetup() },
             )
         }
@@ -246,7 +253,7 @@ private fun copyToClipboard(context: Context, text: String) {
 }
 
 @Composable
-private fun PermissionsStep(onEnableNotifications: () -> Unit, onFinish: () -> Unit) {
+private fun PermissionsStep(onEnableNotifications: () -> Unit, onHelp: () -> Unit, onFinish: () -> Unit) {
     val status by rememberSetupStatus()
     val openAccessibility = openAccessibilitySettings()
     val requestCamera = rememberCameraRequest()
@@ -310,6 +317,7 @@ private fun PermissionsStep(onEnableNotifications: () -> Unit, onFinish: () -> U
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 32.dp, vertical = 12.dp),
             )
+            FilledTonalButton(onClick = onHelp) { Text(stringResource(R.string.help_how_to_enable)) }
         }
         Spacer(Modifier.height(20.dp))
         if (status.accessibilityEnabled) {

@@ -175,4 +175,36 @@
     <string name="backup_restored">Settings restored</string>
     <string name="backup_failed">Couldn\'t save the backup</string>
     <string name="backup_invalid">That file isn\'t an AppLock backup</string>
+
+    <!-- Setup guide -->
+    <string name="help_link">Step-by-step help</string>
+    <string name="help_how_to_enable">How do I turn this on?</string>
+    <string name="guide_title">Turn on protection</string>
+    <string name="guide_intro">Android hides this switch on purpose, so it takes a few taps. Follow the steps in order. This page ticks step 2 off by itself when it works.</string>
+    <string name="guide_step1_title">Allow restricted settings</string>
+    <string name="guide_step1_body">Android blocks apps installed from a file until you allow them.</string>
+    <string name="guide_step1_a">Tap the button below to open AppLock\'s App info page.</string>
+    <string name="guide_step1_b">Tap the ⋮ menu at the top right.</string>
+    <string name="guide_step1_c">Tap Allow restricted settings, then confirm with your PIN or fingerprint.</string>
+    <string name="guide_step1_missing">Don\'t see Allow restricted settings? Do step 2 first and try to switch AppLock on. Android shows a block message, and the option then appears in the ⋮ menu.</string>
+    <string name="guide_step1_action">Open AppLock\'s App info</string>
+    <string name="guide_mock_title">App info</string>
+    <string name="guide_mock_item">Allow restricted settings</string>
+    <string name="guide_step2_title">Switch on the AppLock service</string>
+    <string name="guide_step2_a">Tap the button below to open Accessibility settings.</string>
+    <string name="guide_step2_b">Open: %1$s.</string>
+    <string name="guide_step2_c">Turn the switch on, then tap Allow.</string>
+    <string name="guide_path_samsung">Installed apps, then AppLock</string>
+    <string name="guide_path_other">Installed apps or Downloaded apps, then AppLock</string>
+    <string name="guide_step2_action">Open Accessibility settings</string>
+    <string name="guide_step3_title">Check it worked</string>
+    <string name="guide_step3_wait">This ticks by itself once the service is on. Come back here after you switch it on.</string>
+    <string name="guide_step3_done">The service is running. Locked apps will now ask for your PIN or pattern.</string>
+    <string name="guide_trouble_title">Still stuck?</string>
+    <string name="guide_trouble_grey">The switch is greyed out: repeat step 1, then try step 2 again.</string>
+    <string name="guide_trouble_missing">AppLock isn\'t in the list: reinstall the app, then start again from step 1.</string>
+    <string name="guide_trouble_off">It switches itself off: open App info, tap Battery, and choose Unrestricted.</string>
+    <string name="guide_trouble_brand">Xiaomi, Oppo, Vivo, OnePlus and others: also allow Autostart or background activity for AppLock in the phone\'s security or battery settings.</string>
+    <string name="guide_done">Done</string>
+    <string name="guide_close">Close</string>
 </resources>

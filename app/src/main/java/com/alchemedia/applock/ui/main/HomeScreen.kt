@@ -63,6 +63,7 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var changingCredential by rememberSaveable { mutableStateOf(false) }
     var newRecoveryCode by rememberSaveable { mutableStateOf<String?>(null) }
+    var showGuide by rememberSaveable { mutableStateOf(false) }
 
     val apps by viewModel.apps.collectAsState()
     val shots by viewModel.shots.collectAsState()
@@ -90,6 +91,11 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
             },
             onCancel = { changingCredential = false },
         )
+        return
+    }
+
+    if (showGuide) {
+        SetupGuideScreen(onClose = { showGuide = false })
         return
     }
 
@@ -127,6 +133,7 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                     apps = apps,
                     status = status,
                     onToggle = viewModel::setLocked,
+                    onHelp = { showGuide = true },
                     modifier = content,
                 )
                 Tab.Intruders -> IntrudersTab(
@@ -139,6 +146,7 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                     settings = settings,
                     status = status,
                     onChangeCredential = { changingCredential = true },
+                    onHelp = { showGuide = true },
                     onBiometric = { viewModel.setBiometricEnabled(it) },
                     onShuffle = { viewModel.setShuffleKeypad(it) },
                     onCapture = { viewModel.setCaptureIntruders(it) },
