@@ -45,12 +45,18 @@
     <string name="header_settings_sub">Tune how AppLock protects you</string>
     <string name="hero_active">Protection is active</string>
     <string name="hero_off">Protection is off</string>
-    <string name="hero_locked_count">%1$d apps locked</string>
     <string name="hero_none">No apps locked yet</string>
     <string name="hero_off_sub">Turn on the AppLock service so locked apps are covered.</string>
     <string name="section_protected">Protected</string>
     <string name="section_other">Other apps</string>
-    <string name="intruders_summary">%1$d photos captured</string>
+    <plurals name="hero_locked_count">
+        <item quantity="one">%1$d app locked</item>
+        <item quantity="other">%1$d apps locked</item>
+    </plurals>
+    <plurals name="intruders_summary">
+        <item quantity="one">%1$d photo captured</item>
+        <item quantity="other">%1$d photos captured</item>
+    </plurals>
     <string name="failed_unlock">Failed unlock</string>
     <string name="chevron">›</string>
 

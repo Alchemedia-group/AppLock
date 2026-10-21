@@ -28,6 +28,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Surface
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import com.alchemedia.applock.ui.components.IconTile
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -113,7 +114,7 @@ fun IntrudersTab(
                     ) {
                         Row(Modifier.padding(start = 20.dp, end = 8.dp, top = 8.dp, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                stringResource(R.string.intruders_summary, shots.size),
+                                pluralStringResource(R.plurals.intruders_summary, shots.size, shots.size),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = colors.onErrorContainer,
                                 modifier = Modifier.weight(1f),

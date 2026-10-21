@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -109,7 +110,7 @@ fun ProtectionHero(
                         when {
                             !active -> stringResource(R.string.hero_off_sub)
                             lockedCount == 0 -> stringResource(R.string.hero_none)
-                            else -> stringResource(R.string.hero_locked_count, lockedCount)
+                            else -> pluralStringResource(R.plurals.hero_locked_count, lockedCount, lockedCount)
                         },
                         style = MaterialTheme.typography.bodyMedium,
                         color = colors.onSurfaceVariant,
