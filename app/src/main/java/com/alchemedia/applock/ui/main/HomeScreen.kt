@@ -29,6 +29,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -45,6 +46,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import com.alchemedia.applock.R
 import com.alchemedia.applock.data.AppSettings
+import com.alchemedia.applock.intruder.IntruderShot
 import com.alchemedia.applock.ui.components.AppLogo
 import com.alchemedia.applock.security.RecoveryCode
 
@@ -66,6 +68,7 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
     var newRecoveryCode by rememberSaveable { mutableStateOf<String?>(null) }
     var showGuide by rememberSaveable { mutableStateOf(false) }
     var showPro by rememberSaveable { mutableStateOf(false) }
+    var viewing by remember { mutableStateOf<IntruderShot?>(null) }
 
     val apps by viewModel.apps.collectAsState()
     val shots by viewModel.shots.collectAsState()
@@ -158,7 +161,7 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                 )
                 Tab.Intruders -> IntrudersTab(
                     shots = shots,
-                    onDelete = viewModel::deleteShot,
+                    onOpen = { viewing = it },
                     onDeleteAll = viewModel::deleteAllShots,
                     isPro = settings.proUnlocked,
                     onUpgrade = { showPro = true },
@@ -193,6 +196,18 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                 tab = it
                 viewModel.clearBackupMessage()
             })
+        }
+
+        // Above everything, including the floating navigation, so its Back and Delete can't be covered.
+        viewing?.let { shot ->
+            PhotoViewer(
+                shot = shot,
+                onClose = { viewing = null },
+                onDelete = {
+                    viewModel.deleteShot(shot)
+                    viewing = null
+                },
+            )
         }
     }
 }

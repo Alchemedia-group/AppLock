@@ -1,13 +1,6 @@
 package com.alchemedia.applock.ui.main
 
 import android.content.Context
-import android.content.Intent
-import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.FileProvider
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.launch
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -22,7 +15,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -31,8 +23,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Surface
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
@@ -68,45 +58,17 @@ import kotlin.math.max
 @Composable
 fun IntrudersTab(
     shots: List<IntruderShot>,
-    onDelete: (IntruderShot) -> Unit,
+    onOpen: (IntruderShot) -> Unit,
     onDeleteAll: () -> Unit,
     isPro: Boolean,
     onUpgrade: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var open by remember { mutableStateOf<IntruderShot?>(null) }
     var confirmDeleteAll by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val colors = MaterialTheme.colorScheme
     val unknownApp = stringResource(R.string.intruder_unknown_app)
-    val scope = rememberCoroutineScope()
-    var pendingSave by remember { mutableStateOf<IntruderShot?>(null) }
-    val saveLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("image/jpeg")) { uri ->
-        val shot = pendingSave
-        pendingSave = null
-        if (uri != null && shot != null) {
-            scope.launch {
-                val ok = withContext(Dispatchers.IO) {
-                    runCatching {
-                        context.contentResolver.openOutputStream(uri)?.use { out ->
-                            shot.file.inputStream().use { it.copyTo(out) }
-                        } != null
-                    }.getOrDefault(false)
-                }
-                Toast.makeText(context, if (ok) R.string.intruder_saved else R.string.intruder_save_failed, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    fun labelFor(shot: IntruderShot): String {
-        val pkg = shot.packageName ?: return unknownApp
-        return try {
-            val pm = context.packageManager
-            pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString()
-        } catch (_: Exception) {
-            pkg
-        }
-    }
+    fun labelFor(shot: IntruderShot): String = appLabelFor(context, shot, unknownApp)
 
     Box(modifier.fillMaxSize()) {
         if (shots.isEmpty()) {
@@ -186,7 +148,7 @@ fun IntrudersTab(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp)
-                            .clickable { open = shot },
+                            .clickable { onOpen(shot) },
                         shape = MaterialTheme.shapes.large,
                         color = colors.surfaceContainer,
                     ) {
@@ -221,68 +183,11 @@ fun IntrudersTab(
                 }
             }
         }
-
-        open?.let { shot ->
-            // Drawn in-window instead of as a Dialog so the navigation bar stays hidden.
-            Column(
-                Modifier
-                    .fillMaxSize()
-                    .background(Color.Black)
-                    .safeDrawingPadding()
-                    .padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                ShotImage(
-                    file = shot.file,
-                    maxDimension = 1600,
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
-                        .clip(MaterialTheme.shapes.large),
-                )
-                Text(
-                    stringResource(R.string.intruder_tried_to_open, labelFor(shot)),
-                    color = Color.White,
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(top = 16.dp),
-                )
-                Text(formatTime(context, shot.timestamp), color = Color.LightGray, style = MaterialTheme.typography.bodyMedium)
-                Row(Modifier.padding(top = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    FilledTonalButton(onClick = { shareShot(context, shot, labelFor(shot)) }) { Text(stringResource(R.string.intruder_share)) }
-                    FilledTonalButton(onClick = {
-                        pendingSave = shot
-                        saveLauncher.launch("applock-intruder-${shot.timestamp}.jpg")
-                    }) { Text(stringResource(R.string.intruder_save)) }
-                }
-                Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    FilledTonalButton(onClick = { open = null }) { Text(stringResource(R.string.intruder_close)) }
-                    Button(
-                        onClick = {
-                            onDelete(shot)
-                            open = null
-                        },
-                        colors = ButtonDefaults.buttonColors(containerColor = colors.error, contentColor = colors.onError),
-                    ) { Text(stringResource(R.string.intruder_delete)) }
-                }
-            }
-        }
     }
 }
 
-/** Hands the photo to the system share sheet through the FileProvider (never a raw file path). */
-private fun shareShot(context: Context, shot: IntruderShot, appLabel: String) {
-    val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", shot.file)
-    val send = Intent(Intent.ACTION_SEND)
-        .setType("image/jpeg")
-        .putExtra(Intent.EXTRA_STREAM, uri)
-        .putExtra(Intent.EXTRA_TEXT, context.getString(R.string.intruder_share_text, appLabel))
-        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    context.startActivity(Intent.createChooser(send, context.getString(R.string.intruder_share_chooser)))
-}
-
 @Composable
-private fun ShotImage(
+internal fun ShotImage(
     file: File,
     maxDimension: Int,
     modifier: Modifier = Modifier,
@@ -298,7 +203,7 @@ private fun ShotImage(
     }
 }
 
-private fun formatTime(context: Context, timestamp: Long): String =
+internal fun formatTime(context: Context, timestamp: Long): String =
     DateUtils.formatDateTime(
         context,
         timestamp,
@@ -327,4 +232,15 @@ private fun decodeUpright(file: File, maxDimension: Int): ImageBitmap? {
         Bitmap.createBitmap(decoded, 0, 0, decoded.width, decoded.height, Matrix().apply { postRotate(degrees) }, true)
     }
     return upright.asImageBitmap()
+}
+
+/** The app's display name, or its package name if it was uninstalled, or [unknown] for AppLock's own gate. */
+internal fun appLabelFor(context: Context, shot: IntruderShot, unknown: String): String {
+    val pkg = shot.packageName ?: return unknown
+    return try {
+        val pm = context.packageManager
+        pm.getApplicationLabel(pm.getApplicationInfo(pkg, 0)).toString()
+    } catch (_: Exception) {
+        pkg
+    }
 }

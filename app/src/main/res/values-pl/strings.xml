@@ -213,4 +213,5 @@
     <string name="disclosure_point_off">Możesz ją wyłączyć w dowolnej chwili w ustawieniach Androida. Ochrona wtedy przestaje działać.</string>
     <string name="disclosure_agree">Zgadzam się i kontynuuję</string>
     <string name="disclosure_decline">Nie, dziękuję</string>
+    <string name="intruder_delete_confirm">Dotknij ponownie, aby usunąć</string>
 </resources>

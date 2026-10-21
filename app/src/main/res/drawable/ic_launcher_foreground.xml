@@ -32,6 +32,6 @@
         </aapt:attr>
     </path>
     <path
-        android:fillColor="#FF04120D"
+        android:fillColor="#FF000000"
         android:pathData="M54,43.5 A6.5,6.5 0 1 1 54,56.5 A6.5,6.5 0 1 1 54,43.5 Z M51.1,54 H56.9 L59.5,66 H48.5 Z" />
 </vector>

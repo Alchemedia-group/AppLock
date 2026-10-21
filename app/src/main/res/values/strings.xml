@@ -254,4 +254,5 @@
     <string name="disclosure_point_off">You can turn it off any time in Android Settings. Protection then stops.</string>
     <string name="disclosure_agree">Agree and continue</string>
     <string name="disclosure_decline">No thanks</string>
+    <string name="intruder_delete_confirm">Tap again to delete</string>
 </resources>

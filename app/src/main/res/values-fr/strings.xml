@@ -211,4 +211,5 @@
     <string name="disclosure_point_off">Tu peux le désactiver à tout moment dans les réglages d’Android. La protection s’arrête alors.</string>
     <string name="disclosure_agree">Accepter et continuer</string>
     <string name="disclosure_decline">Non merci</string>
+    <string name="intruder_delete_confirm">Touche à nouveau pour supprimer</string>
 </resources>

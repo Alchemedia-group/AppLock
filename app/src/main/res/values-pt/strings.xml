@@ -211,4 +211,5 @@
     <string name="disclosure_point_off">Podes desativá-lo em qualquer altura nas definições do Android. A proteção deixa então de funcionar.</string>
     <string name="disclosure_agree">Aceitar e continuar</string>
     <string name="disclosure_decline">Não, obrigado</string>
+    <string name="intruder_delete_confirm">Toca novamente para eliminar</string>
 </resources>

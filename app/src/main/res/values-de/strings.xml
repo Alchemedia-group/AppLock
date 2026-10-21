@@ -209,4 +209,5 @@
     <string name="disclosure_point_off">Du kannst ihn jederzeit in den Android-Einstellungen ausschalten. Dann endet der Schutz.</string>
     <string name="disclosure_agree">Zustimmen und weiter</string>
     <string name="disclosure_decline">Nein danke</string>
+    <string name="intruder_delete_confirm">Zum Löschen erneut tippen</string>
 </resources>
