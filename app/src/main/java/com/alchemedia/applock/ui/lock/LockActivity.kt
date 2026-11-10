@@ -1,5 +1,6 @@
 package com.alchemedia.applock.ui.lock
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -87,6 +88,8 @@ class LockActivity : FragmentActivity() {
         setContent {
             AppLockTheme {
                 val settings by viewModel.settings.collectAsState()
+                // A system call: do it once, not on every recomposition.
+                val biometricAvailable = remember { isBiometricAvailable(this@LockActivity) }
                 val ui by viewModel.ui.collectAsState()
                 val target = targetPackage
                 val appInfo = remember(target) { target?.let(::loadTargetApp) }
@@ -106,7 +109,7 @@ class LockActivity : FragmentActivity() {
                                 ?: stringResource(R.string.unlock_applock),
                             icon = appInfo?.second,
                             onSecret = { secret -> viewModel.submit(secret, ::unlock) },
-                            onBiometric = if (current.biometricEnabled && isBiometricAvailable(this@LockActivity)) {
+                            onBiometric = if (current.biometricEnabled && biometricAvailable) {
                                 ::showBiometricPrompt
                             } else {
                                 null
@@ -137,11 +140,15 @@ class LockActivity : FragmentActivity() {
     }
 
     private fun goHome() {
-        startActivity(
-            Intent(Intent.ACTION_MAIN)
-                .addCategory(Intent.CATEGORY_HOME)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-        )
+        try {
+            startActivity(
+                Intent(Intent.ACTION_MAIN)
+                    .addCategory(Intent.CATEGORY_HOME)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            )
+        } catch (_: ActivityNotFoundException) {
+            // No launcher to go back to: just close the lock screen.
+        }
         finish()
     }
 

@@ -44,6 +44,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.alchemedia.applock.R
 import com.alchemedia.applock.intruder.IntruderShot
+import com.alchemedia.applock.ui.launchSafely
+import com.alchemedia.applock.ui.startActivitySafely
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -153,7 +155,7 @@ fun PhotoViewer(
             FilledTonalButton(onClick = { shareShot(context, shot, label) }) { Text(stringResource(R.string.intruder_share)) }
             FilledTonalButton(onClick = {
                 pendingSave = shot
-                saveLauncher.launch("applock-intruder-${shot.timestamp}.jpg")
+                saveLauncher.launchSafely(context, "applock-intruder-${shot.timestamp}.jpg", R.string.error_no_file_picker)
             }) { Text(stringResource(R.string.intruder_save)) }
         }
     }
@@ -167,5 +169,5 @@ private fun shareShot(context: Context, shot: IntruderShot, appLabel: String) {
         .putExtra(Intent.EXTRA_STREAM, uri)
         .putExtra(Intent.EXTRA_TEXT, context.getString(R.string.intruder_share_text, appLabel))
         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-    context.startActivity(Intent.createChooser(send, context.getString(R.string.intruder_share_chooser)))
+    context.startActivitySafely(Intent.createChooser(send, context.getString(R.string.intruder_share_chooser)))
 }

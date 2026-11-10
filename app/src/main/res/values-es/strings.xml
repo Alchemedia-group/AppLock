@@ -212,4 +212,7 @@
     <string name="disclosure_agree">Aceptar y continuar</string>
     <string name="disclosure_decline">No, gracias</string>
     <string name="intruder_delete_confirm">Toca otra vez para eliminar</string>
+    <string name="error_settings_unavailable">No se pudo abrir esa pantalla de Ajustes. Ábrela desde la app Ajustes de tu teléfono.</string>
+    <string name="error_no_file_picker">Este teléfono no tiene selector de archivos, así que no se puede hacer aquí.</string>
+    <string name="error_action_unavailable">Ninguna app de este teléfono puede hacer eso.</string>
 </resources>

@@ -212,4 +212,7 @@
     <string name="disclosure_agree">Accepter et continuer</string>
     <string name="disclosure_decline">Non merci</string>
     <string name="intruder_delete_confirm">Touche à nouveau pour supprimer</string>
+    <string name="error_settings_unavailable">Impossible d’ouvrir cet écran de réglages. Ouvre-le depuis l’appli Réglages de ton téléphone.</string>
+    <string name="error_no_file_picker">Ce téléphone n’a pas de sélecteur de fichiers, donc ce n’est pas possible ici.</string>
+    <string name="error_action_unavailable">Aucune appli de ce téléphone ne peut faire cela.</string>
 </resources>

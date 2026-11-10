@@ -210,4 +210,7 @@
     <string name="disclosure_agree">Zustimmen und weiter</string>
     <string name="disclosure_decline">Nein danke</string>
     <string name="intruder_delete_confirm">Zum Löschen erneut tippen</string>
+    <string name="error_settings_unavailable">Diese Einstellungsseite konnte nicht geöffnet werden. Öffne sie in der Einstellungen-App deines Handys.</string>
+    <string name="error_no_file_picker">Dieses Handy hat keine Dateiauswahl, daher ist das hier nicht möglich.</string>
+    <string name="error_action_unavailable">Keine App auf diesem Handy kann das tun.</string>
 </resources>

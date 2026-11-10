@@ -49,6 +49,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.alchemedia.applock.R
+import com.alchemedia.applock.ui.startActivitySafely
 
 /**
  * Walks the user through the two awkward Android screens needed to enable protection, with a button
@@ -60,9 +61,10 @@ fun SetupGuideScreen(onClose: () -> Unit, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val samsung = remember { Build.MANUFACTURER.equals("samsung", ignoreCase = true) }
     val openAccessibility = openAccessibilitySettings()
-    val openAppInfo = {
-        context.startActivity(
+    val openAppInfo: () -> Unit = {
+        context.startActivitySafely(
             Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", context.packageName, null)),
+            R.string.error_settings_unavailable,
         )
     }
     val enabled = status.accessibilityEnabled

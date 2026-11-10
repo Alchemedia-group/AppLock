@@ -212,4 +212,7 @@
     <string name="disclosure_agree">Accetta e continua</string>
     <string name="disclosure_decline">No, grazie</string>
     <string name="intruder_delete_confirm">Tocca di nuovo per eliminare</string>
+    <string name="error_settings_unavailable">Impossibile aprire quella schermata delle impostazioni. Aprila dall\'app Impostazioni del telefono.</string>
+    <string name="error_no_file_picker">Questo telefono non ha un selettore di file, quindi non è possibile farlo qui.</string>
+    <string name="error_action_unavailable">Nessuna app su questo telefono può farlo.</string>
 </resources>

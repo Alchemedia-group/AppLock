@@ -214,4 +214,7 @@
     <string name="disclosure_agree">Zgadzam się i kontynuuję</string>
     <string name="disclosure_decline">Nie, dziękuję</string>
     <string name="intruder_delete_confirm">Dotknij ponownie, aby usunąć</string>
+    <string name="error_settings_unavailable">Nie udało się otworzyć tego ekranu ustawień. Otwórz go w aplikacji Ustawienia na telefonie.</string>
+    <string name="error_no_file_picker">Ten telefon nie ma selektora plików, więc nie można tego tu zrobić.</string>
+    <string name="error_action_unavailable">Żadna aplikacja na tym telefonie nie może tego zrobić.</string>
 </resources>

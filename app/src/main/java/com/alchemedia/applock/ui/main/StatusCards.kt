@@ -44,6 +44,8 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import com.alchemedia.applock.R
 import com.alchemedia.applock.security.SetupStatus
 import com.alchemedia.applock.security.canPostNotifications
+import com.alchemedia.applock.ui.launchSafely
+import com.alchemedia.applock.ui.startActivitySafely
 import com.alchemedia.applock.ui.components.IconTile
 
 /** Permission/service status that re-reads whenever the app returns to the foreground. */
@@ -66,7 +68,7 @@ fun openAccessibilitySettings(): () -> Unit {
     val settings by viewModel.settings.collectAsState()
     return {
         if (settings?.accessibilityConsent == true) {
-            context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+            context.startActivitySafely(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), R.string.error_settings_unavailable)
         } else {
             viewModel.accessibilityDisclosurePending = true
         }
@@ -77,13 +79,15 @@ fun openAccessibilitySettings(): () -> Unit {
 @Composable
 fun rememberNotificationAccessRequest(listenerEnabled: Boolean): () -> Unit {
     val context = LocalContext.current
-    val openListenerSettings = { context.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
+    val openListenerSettings = {
+        context.startActivitySafely(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS), R.string.error_settings_unavailable)
+    }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         if (!listenerEnabled) openListenerSettings()
     }
     return {
         if (!canPostNotifications(context)) {
-            launcher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            launcher.launchSafely(context, android.Manifest.permission.POST_NOTIFICATIONS, R.string.error_settings_unavailable)
         } else if (!listenerEnabled) {
             openListenerSettings()
         }
@@ -92,9 +96,10 @@ fun rememberNotificationAccessRequest(listenerEnabled: Boolean): () -> Unit {
 
 @Composable
 fun rememberCameraRequest(): () -> Unit {
+    val context = LocalContext.current
     // The status re-reads on resume, which fires when the permission dialog closes.
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
-    return { launcher.launch(android.Manifest.permission.CAMERA) }
+    return { launcher.launchSafely(context, android.Manifest.permission.CAMERA, R.string.error_settings_unavailable) }
 }
 
 /** Big status card at the top of the Apps tab: green-lit when the service runs, coral when it doesn't. */

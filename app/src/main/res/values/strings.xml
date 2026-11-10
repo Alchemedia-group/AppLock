@@ -255,4 +255,7 @@
     <string name="disclosure_agree">Agree and continue</string>
     <string name="disclosure_decline">No thanks</string>
     <string name="intruder_delete_confirm">Tap again to delete</string>
+    <string name="error_settings_unavailable">Couldn\'t open that Settings screen. Open it from your phone\'s Settings app.</string>
+    <string name="error_no_file_picker">This phone has no file picker, so this can\'t be done here.</string>
+    <string name="error_action_unavailable">No app on this phone can do that.</string>
 </resources>

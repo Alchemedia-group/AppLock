@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
@@ -100,7 +101,12 @@ class AppLockAccessibilityService : AccessibilityService() {
         val intent = Intent(this, LockActivity::class.java)
             .putExtra(LockActivity.EXTRA_PACKAGE, pkg)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        startActivity(intent)
+        try {
+            startActivity(intent)
+        } catch (e: RuntimeException) {
+            // Android refused the launch (for example a background-start restriction); try again on the next event.
+            Log.w("AppLockService", "Could not show the lock screen", e)
+        }
     }
 
     private fun loadImePackages(): Set<String> =

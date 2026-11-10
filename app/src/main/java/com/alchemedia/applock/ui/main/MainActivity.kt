@@ -28,6 +28,7 @@ import com.alchemedia.applock.R
 import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.intruder.IntruderCamera
 import com.alchemedia.applock.ui.lock.LockScreen
+import com.alchemedia.applock.ui.startActivitySafely
 import com.alchemedia.applock.ui.lock.LockViewModel
 import com.alchemedia.applock.ui.theme.AppBackdrop
 import com.alchemedia.applock.ui.theme.AppLockTheme
@@ -85,7 +86,7 @@ class MainActivity : FragmentActivity() {
                         mainViewModel.accessibilityDisclosurePending -> AccessibilityDisclosureScreen(
                             onAgree = {
                                 mainViewModel.agreeToAccessibilityDisclosure()
-                                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                                startActivitySafely(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), R.string.error_settings_unavailable)
                             },
                             onDecline = { mainViewModel.accessibilityDisclosurePending = false },
                         )

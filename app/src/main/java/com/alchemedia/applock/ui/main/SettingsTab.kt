@@ -25,6 +25,8 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -40,6 +42,7 @@ import com.alchemedia.applock.data.RelockMode
 import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.security.SetupStatus
 import com.alchemedia.applock.security.isBiometricAvailable
+import com.alchemedia.applock.ui.launchSafely
 import com.alchemedia.applock.ui.components.GroupCard
 import com.alchemedia.applock.ui.components.SectionLabel
 import com.alchemedia.applock.ui.components.Segmented
@@ -70,7 +73,8 @@ fun SettingsTab(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val biometricAvailable = isBiometricAvailable(context)
+    var biometricAvailable by remember { mutableStateOf(isBiometricAvailable(context)) }
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { biometricAvailable = isBiometricAvailable(context) }
     val openAccessibility = openAccessibilitySettings()
     val colors = MaterialTheme.colorScheme
     val requestNotificationAccess = rememberNotificationAccessRequest(status.notificationListenerEnabled)
@@ -257,12 +261,18 @@ fun SettingsTab(
             SettingRow(
                 title = stringResource(R.string.settings_backup),
                 subtitle = stringResource(R.string.settings_backup_hint),
-                onClick = { exportLauncher.launch("applock-backup.json") },
+                onClick = { exportLauncher.launchSafely(context, "applock-backup.json", R.string.error_no_file_picker) },
                 trailing = { Text(stringResource(R.string.chevron), style = MaterialTheme.typography.titleLarge, color = colors.onSurfaceVariant) },
             )
             SettingRow(
                 title = stringResource(R.string.settings_restore),
-                onClick = { importLauncher.launch(arrayOf("application/json", "application/octet-stream", "text/plain")) },
+                onClick = {
+                    importLauncher.launchSafely(
+                        context,
+                        arrayOf("application/json", "application/octet-stream", "text/plain"),
+                        R.string.error_no_file_picker,
+                    )
+                },
                 trailing = { Text(stringResource(R.string.chevron), style = MaterialTheme.typography.titleLarge, color = colors.onSurfaceVariant) },
             )
             if (backupMessage != null) {
