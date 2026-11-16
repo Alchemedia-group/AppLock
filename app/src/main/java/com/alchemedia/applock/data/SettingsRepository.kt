@@ -37,6 +37,8 @@ class SettingsRepository(private val context: Context) {
         val HIDE_NOTIFICATIONS = booleanPreferencesKey("hide_notifications")
         val AUTO_DELETE_DAYS = intPreferencesKey("auto_delete_days")
         val PRO_UNLOCKED = booleanPreferencesKey("pro_unlocked")
+        val PROTECT_UNINSTALL = booleanPreferencesKey("protect_uninstall")
+        val PROTECT_SETTINGS = booleanPreferencesKey("protect_settings")
         val ACCESSIBILITY_CONSENT = booleanPreferencesKey("accessibility_consent")
     }
 
@@ -81,6 +83,8 @@ class SettingsRepository(private val context: Context) {
         prefs[Keys.FAKE_CRASH] = backup.fakeCrash
         prefs[Keys.HIDE_NOTIFICATIONS] = backup.hideNotifications
         prefs[Keys.AUTO_DELETE_DAYS] = backup.autoDeleteDays
+        prefs[Keys.PROTECT_UNINSTALL] = backup.protectUninstall
+        prefs[Keys.PROTECT_SETTINGS] = backup.protectSettings
     }
 
     suspend fun setBiometricEnabled(value: Boolean) = update { it[Keys.BIOMETRIC] = value }
@@ -91,6 +95,8 @@ class SettingsRepository(private val context: Context) {
     suspend fun setFakeCrash(value: Boolean) = update { it[Keys.FAKE_CRASH] = value }
     suspend fun setHideNotifications(value: Boolean) = update { it[Keys.HIDE_NOTIFICATIONS] = value }
     suspend fun setAccessibilityConsent(value: Boolean) = update { it[Keys.ACCESSIBILITY_CONSENT] = value }
+    suspend fun setProtectUninstall(value: Boolean) = update { it[Keys.PROTECT_UNINSTALL] = value }
+    suspend fun setProtectSettings(value: Boolean) = update { it[Keys.PROTECT_SETTINGS] = value }
     suspend fun setProUnlocked(value: Boolean) = update { it[Keys.PRO_UNLOCKED] = value }
     suspend fun setAutoDeleteDays(value: Int) = update { it[Keys.AUTO_DELETE_DAYS] = value.coerceAtLeast(0) }
 
@@ -114,6 +120,8 @@ class SettingsRepository(private val context: Context) {
         fakeCrash = this[Keys.FAKE_CRASH] ?: false,
         hideNotifications = this[Keys.HIDE_NOTIFICATIONS] ?: false,
         autoDeleteDays = this[Keys.AUTO_DELETE_DAYS] ?: 0,
+        protectUninstall = this[Keys.PROTECT_UNINSTALL] ?: false,
+        protectSettings = this[Keys.PROTECT_SETTINGS] ?: false,
         proUnlocked = this[Keys.PRO_UNLOCKED] ?: false,
         accessibilityConsent = this[Keys.ACCESSIBILITY_CONSENT] ?: false,
     )

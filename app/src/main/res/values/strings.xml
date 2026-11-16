@@ -258,4 +258,11 @@
     <string name="error_settings_unavailable">Couldn\'t open that Settings screen. Open it from your phone\'s Settings app.</string>
     <string name="error_no_file_picker">This phone has no file picker, so this can\'t be done here.</string>
     <string name="error_action_unavailable">No app on this phone can do that.</string>
+    <string name="settings_section_protect">Protect AppLock</string>
+    <string name="settings_protect_uninstall">Ask for my PIN before uninstalling apps</string>
+    <string name="settings_protect_uninstall_hint">Covers the uninstall box from Settings, Google Play and the home screen. It also asks before installing apps from files.</string>
+    <string name="settings_protect_settings">Also lock Android Settings</string>
+    <string name="settings_protect_settings_hint">Stops someone switching AppLock off in Settings first. You will need your PIN each time you open Settings.</string>
+    <string name="settings_protect_limits">This can\'t stop an uninstall from a computer or in Safe mode, so keep your phone\'s own screen lock on too.</string>
+    <string name="lock_title_installer">Enter your PIN to install or remove apps</string>
 </resources>

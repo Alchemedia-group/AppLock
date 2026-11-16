@@ -180,6 +180,8 @@ fun HomeScreen(settings: AppSettings, viewModel: MainViewModel) {
                     onAttempts = { viewModel.setAttemptsBeforeCapture(it) },
                     onRelock = { viewModel.setRelockMode(it) },
                     onFakeCrash = { viewModel.setFakeCrash(it) },
+                    onProtectUninstall = { viewModel.setProtectUninstall(it) },
+                    onProtectSettings = { viewModel.setProtectSettings(it) },
                     onHideNotifications = { viewModel.setHideNotifications(it) },
                     onAutoDelete = { viewModel.setAutoDeleteDays(it) },
                     onNewRecoveryCode = { newRecoveryCode = RecoveryCode.generate() },

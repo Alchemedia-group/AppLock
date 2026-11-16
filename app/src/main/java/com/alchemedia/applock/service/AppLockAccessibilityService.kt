@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.alchemedia.applock.AppLockApp
 import com.alchemedia.applock.data.AppSettings
 import com.alchemedia.applock.data.RelockMode
+import com.alchemedia.applock.security.SystemProtection
 import com.alchemedia.applock.security.UnlockSession
 import com.alchemedia.applock.ui.lock.LockActivity
 import kotlinx.coroutines.CoroutineScope
@@ -92,7 +93,7 @@ class AppLockAccessibilityService : AccessibilityService() {
 
     private fun evaluate(pkg: String) {
         val s = settings
-        if (!s.setupComplete || pkg !in s.lockedPackages) return
+        if (!s.setupComplete || !SystemProtection.isLocked(pkg, s)) return
         if (UnlockSession.isUnlocked(pkg, s.relockMode)) return
         showLock(pkg)
     }

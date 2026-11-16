@@ -215,4 +215,11 @@
     <string name="error_settings_unavailable">Não foi possível abrir esse ecrã de definições. Abre-o a partir da app Definições do teu telemóvel.</string>
     <string name="error_no_file_picker">Este telemóvel não tem um seletor de ficheiros, por isso não é possível fazê-lo aqui.</string>
     <string name="error_action_unavailable">Nenhuma app neste telemóvel consegue fazer isso.</string>
+    <string name="settings_section_protect">Proteger o AppLock</string>
+    <string name="settings_protect_uninstall">Pedir o meu PIN antes de desinstalar apps</string>
+    <string name="settings_protect_uninstall_hint">Abrange a caixa de desinstalação a partir das Definições, do Google Play e do ecrã principal. Pede também antes de instalar apps a partir de ficheiros.</string>
+    <string name="settings_protect_settings">Bloquear também as Definições do Android</string>
+    <string name="settings_protect_settings_hint">Impede que alguém desative primeiro o AppLock nas Definições. Vais precisar do PIN sempre que abrires as Definições.</string>
+    <string name="settings_protect_limits">Isto não consegue impedir uma desinstalação a partir de um computador ou em modo de segurança, por isso mantém também o bloqueio de ecrã do telemóvel.</string>
+    <string name="lock_title_installer">Introduz o PIN para instalar ou remover apps</string>
 </resources>

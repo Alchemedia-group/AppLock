@@ -23,6 +23,8 @@ object BackupManager {
         put("fakeCrash", settings.fakeCrash)
         put("hideNotifications", settings.hideNotifications)
         put("autoDeleteDays", settings.autoDeleteDays)
+        put("protectUninstall", settings.protectUninstall)
+        put("protectSettings", settings.protectSettings)
     }.toString(2)
 
     /** Returns null if [json] isn't an AppLock backup. Missing fields fall back to defaults. */
@@ -45,6 +47,8 @@ object BackupManager {
                 fakeCrash = o.optBoolean("fakeCrash", defaults.fakeCrash),
                 hideNotifications = o.optBoolean("hideNotifications", defaults.hideNotifications),
                 autoDeleteDays = o.optInt("autoDeleteDays", defaults.autoDeleteDays).coerceAtLeast(0),
+                protectUninstall = o.optBoolean("protectUninstall", defaults.protectUninstall),
+                protectSettings = o.optBoolean("protectSettings", defaults.protectSettings),
             )
         }
     } catch (_: JSONException) {

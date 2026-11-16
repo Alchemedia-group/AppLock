@@ -67,6 +67,8 @@ fun SettingsTab(
     onHideNotifications: (Boolean) -> Unit,
     onAutoDelete: (Int) -> Unit,
     onNewRecoveryCode: () -> Unit,
+    onProtectUninstall: (Boolean) -> Unit,
+    onProtectSettings: (Boolean) -> Unit,
     onExport: (Uri) -> Unit,
     onImport: (Uri) -> Unit,
     backupMessage: Int?,
@@ -153,6 +155,26 @@ fun SettingsTab(
                 title = stringResource(R.string.settings_fake_crash),
                 subtitle = stringResource(R.string.settings_fake_crash_hint),
                 trailing = { Switch(checked = settings.fakeCrash, onCheckedChange = onFakeCrash) },
+            )
+        }
+
+        SectionLabel(stringResource(R.string.settings_section_protect))
+        GroupCard {
+            SettingRow(
+                title = stringResource(R.string.settings_protect_uninstall),
+                subtitle = stringResource(R.string.settings_protect_uninstall_hint),
+                trailing = { Switch(checked = settings.protectUninstall, onCheckedChange = onProtectUninstall) },
+            )
+            SettingRow(
+                title = stringResource(R.string.settings_protect_settings),
+                subtitle = stringResource(R.string.settings_protect_settings_hint),
+                trailing = { Switch(checked = settings.protectSettings, onCheckedChange = onProtectSettings) },
+            )
+            Text(
+                stringResource(R.string.settings_protect_limits),
+                style = MaterialTheme.typography.bodySmall,
+                color = colors.onSurfaceVariant,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             )
         }
 

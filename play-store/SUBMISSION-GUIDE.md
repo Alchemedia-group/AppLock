@@ -172,6 +172,7 @@ You also need a payments (merchant) profile and a bank account set up in Play Co
 ## 10. Risks to know about
 
 - **Accessibility API policy.** Google restricts this API to specific uses. An app lock is a legitimate security use, but reviewers look closely. Keep the disclosure, the declaration text and the video accurate and consistent. If it is rejected, read the reason and reply to the reviewer; the alternative is a different detection method, which is a larger rework.
+- **Uninstall protection (v1.0.2).** An optional setting asks for the PIN before the phone's uninstall box and, if chosen, before Android Settings. It is opt-in, uses the existing accessibility detection only (no device admin), and never blocks the user from removing the app (the PIN unlocks it). Google can be wary of anything that resists uninstalling, so say plainly in the listing and declaration that it is optional and PIN-gated.
 - **The fake crash screen** is opt-in and described in the listing; keep that description honest.
 - **The name "AppLock"** is very common. A more distinctive name avoids clashes with existing apps.
 - **The package name** is permanent once published.

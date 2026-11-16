@@ -213,4 +213,11 @@
     <string name="error_settings_unavailable">Diese Einstellungsseite konnte nicht geöffnet werden. Öffne sie in der Einstellungen-App deines Handys.</string>
     <string name="error_no_file_picker">Dieses Handy hat keine Dateiauswahl, daher ist das hier nicht möglich.</string>
     <string name="error_action_unavailable">Keine App auf diesem Handy kann das tun.</string>
+    <string name="settings_section_protect">AppLock schützen</string>
+    <string name="settings_protect_uninstall">Vor dem Deinstallieren von Apps nach meiner PIN fragen</string>
+    <string name="settings_protect_uninstall_hint">Gilt für das Deinstallationsfenster aus den Einstellungen, Google Play und dem Startbildschirm. Fragt auch vor dem Installieren von Apps aus Dateien.</string>
+    <string name="settings_protect_settings">Auch die Android-Einstellungen sperren</string>
+    <string name="settings_protect_settings_hint">Verhindert, dass jemand AppLock zuerst in den Einstellungen ausschaltet. Du brauchst deine PIN bei jedem Öffnen der Einstellungen.</string>
+    <string name="settings_protect_limits">Das kann eine Deinstallation vom Computer oder im abgesicherten Modus nicht verhindern. Lass daher auch die Bildschirmsperre deines Handys eingeschaltet.</string>
+    <string name="lock_title_installer">PIN eingeben, um Apps zu installieren oder zu entfernen</string>
 </resources>

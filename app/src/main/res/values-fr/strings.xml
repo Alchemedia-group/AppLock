@@ -215,4 +215,11 @@
     <string name="error_settings_unavailable">Impossible d’ouvrir cet écran de réglages. Ouvre-le depuis l’appli Réglages de ton téléphone.</string>
     <string name="error_no_file_picker">Ce téléphone n’a pas de sélecteur de fichiers, donc ce n’est pas possible ici.</string>
     <string name="error_action_unavailable">Aucune appli de ce téléphone ne peut faire cela.</string>
+    <string name="settings_section_protect">Protéger AppLock</string>
+    <string name="settings_protect_uninstall">Demander mon code PIN avant de désinstaller des applis</string>
+    <string name="settings_protect_uninstall_hint">Couvre la boîte de désinstallation depuis les réglages, Google Play et l’écran d’accueil. Demande aussi avant d’installer des applis depuis des fichiers.</string>
+    <string name="settings_protect_settings">Verrouiller aussi les réglages d’Android</string>
+    <string name="settings_protect_settings_hint">Empêche quelqu’un de désactiver d’abord AppLock dans les réglages. Il te faudra ton code PIN à chaque ouverture des réglages.</string>
+    <string name="settings_protect_limits">Cela ne peut pas empêcher une désinstallation depuis un ordinateur ou en mode sans échec, garde donc aussi le verrouillage d’écran du téléphone.</string>
+    <string name="lock_title_installer">Saisis ton code PIN pour installer ou supprimer des applis</string>
 </resources>

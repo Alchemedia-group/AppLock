@@ -217,4 +217,11 @@
     <string name="error_settings_unavailable">Nie udało się otworzyć tego ekranu ustawień. Otwórz go w aplikacji Ustawienia na telefonie.</string>
     <string name="error_no_file_picker">Ten telefon nie ma selektora plików, więc nie można tego tu zrobić.</string>
     <string name="error_action_unavailable">Żadna aplikacja na tym telefonie nie może tego zrobić.</string>
+    <string name="settings_section_protect">Chroń AppLock</string>
+    <string name="settings_protect_uninstall">Pytaj o PIN przed odinstalowaniem aplikacji</string>
+    <string name="settings_protect_uninstall_hint">Obejmuje okno odinstalowania z Ustawień, Google Play i ekranu głównego. Pyta też przed instalacją aplikacji z plików.</string>
+    <string name="settings_protect_settings">Zablokuj też Ustawienia Androida</string>
+    <string name="settings_protect_settings_hint">Zapobiega wyłączeniu AppLock w Ustawieniach przez kogoś innego. PIN będzie potrzebny przy każdym otwarciu Ustawień.</string>
+    <string name="settings_protect_limits">To nie powstrzyma odinstalowania z komputera ani w trybie awaryjnym, więc zachowaj też blokadę ekranu telefonu.</string>
+    <string name="lock_title_installer">Wpisz PIN, aby instalować lub usuwać aplikacje</string>
 </resources>

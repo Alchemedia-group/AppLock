@@ -215,4 +215,11 @@
     <string name="error_settings_unavailable">Impossibile aprire quella schermata delle impostazioni. Aprila dall\'app Impostazioni del telefono.</string>
     <string name="error_no_file_picker">Questo telefono non ha un selettore di file, quindi non è possibile farlo qui.</string>
     <string name="error_action_unavailable">Nessuna app su questo telefono può farlo.</string>
+    <string name="settings_section_protect">Proteggi AppLock</string>
+    <string name="settings_protect_uninstall">Chiedi il PIN prima di disinstallare app</string>
+    <string name="settings_protect_uninstall_hint">Copre la finestra di disinstallazione da Impostazioni, Google Play e schermata Home. Lo chiede anche prima di installare app da file.</string>
+    <string name="settings_protect_settings">Blocca anche le Impostazioni di Android</string>
+    <string name="settings_protect_settings_hint">Impedisce che qualcuno disattivi prima AppLock dalle Impostazioni. Ti servirà il PIN ogni volta che apri le Impostazioni.</string>
+    <string name="settings_protect_limits">Non può impedire una disinstallazione da computer o in modalità provvisoria, quindi tieni attivo anche il blocco schermo del telefono.</string>
+    <string name="lock_title_installer">Inserisci il PIN per installare o rimuovere app</string>
 </resources>

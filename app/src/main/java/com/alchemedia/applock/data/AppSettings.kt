@@ -23,6 +23,10 @@ data class AppSettings(
     val hideNotifications: Boolean = false,
     /** Delete intruder photos older than this many days; 0 keeps them forever. */
     val autoDeleteDays: Int = 0,
+    /** Ask for the PIN before apps can be uninstalled (and before installing from files). */
+    val protectUninstall: Boolean = false,
+    /** Ask for the PIN before Android Settings opens, so AppLock's service can't be switched off there. */
+    val protectSettings: Boolean = false,
     /** True once the one-time Pro purchase has been verified with Google Play. */
     val proUnlocked: Boolean = false,
     /** True once the user has agreed to the accessibility disclosure. */

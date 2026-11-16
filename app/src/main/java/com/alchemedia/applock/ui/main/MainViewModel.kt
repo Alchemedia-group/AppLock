@@ -156,6 +156,8 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun setAttemptsBeforeCapture(value: Int) = viewModelScope.launch { repository.setAttemptsBeforeCapture(value) }
     fun setRelockMode(value: RelockMode) = viewModelScope.launch { repository.setRelockMode(value) }
     fun setShuffleKeypad(value: Boolean) = viewModelScope.launch { repository.setShuffleKeypad(value) }
+    fun setProtectUninstall(value: Boolean) = viewModelScope.launch { repository.setProtectUninstall(value) }
+    fun setProtectSettings(value: Boolean) = viewModelScope.launch { repository.setProtectSettings(value) }
     fun setFakeCrash(value: Boolean) = viewModelScope.launch { repository.setFakeCrash(value) }
     fun setHideNotifications(value: Boolean) = viewModelScope.launch { repository.setHideNotifications(value) }
     fun setAutoDeleteDays(value: Int) = viewModelScope.launch { repository.setAutoDeleteDays(value) }

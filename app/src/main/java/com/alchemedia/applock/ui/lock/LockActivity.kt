@@ -34,6 +34,7 @@ import com.alchemedia.applock.BuildConfig
 import com.alchemedia.applock.R
 import com.alchemedia.applock.i18n.LanguageManager
 import com.alchemedia.applock.intruder.IntruderCamera
+import com.alchemedia.applock.security.SystemProtection
 import com.alchemedia.applock.security.UnlockSession
 import com.alchemedia.applock.security.isBiometricAvailable
 import com.alchemedia.applock.ui.theme.AppBackdrop
@@ -95,7 +96,7 @@ class LockActivity : FragmentActivity() {
                 val appInfo = remember(target) { target?.let(::loadTargetApp) }
                 val current = settings
                 AppBackdrop {
-                    if (current != null && current.fakeCrash && !revealed && target != null) {
+                    if (current != null && current.fakeCrash && !revealed && target != null && !SystemProtection.isSystemGuard(target)) {
                         FakeCrashScreen(
                             appLabel = appInfo?.first ?: target,
                             onClose = ::goHome,
@@ -105,8 +106,11 @@ class LockActivity : FragmentActivity() {
                         LockScreen(
                             settings = current,
                             state = ui,
-                            title = appInfo?.first?.let { stringResource(R.string.unlock_app, it) }
-                                ?: stringResource(R.string.unlock_applock),
+                            title = when {
+                                target != null && SystemProtection.isInstaller(target) -> stringResource(R.string.lock_title_installer)
+                                else -> appInfo?.first?.let { stringResource(R.string.unlock_app, it) }
+                                    ?: stringResource(R.string.unlock_applock)
+                            },
                             icon = appInfo?.second,
                             onSecret = { secret -> viewModel.submit(secret, ::unlock) },
                             onBiometric = if (current.biometricEnabled && biometricAvailable) {

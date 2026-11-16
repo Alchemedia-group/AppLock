@@ -215,4 +215,11 @@
     <string name="error_settings_unavailable">No se pudo abrir esa pantalla de Ajustes. Ábrela desde la app Ajustes de tu teléfono.</string>
     <string name="error_no_file_picker">Este teléfono no tiene selector de archivos, así que no se puede hacer aquí.</string>
     <string name="error_action_unavailable">Ninguna app de este teléfono puede hacer eso.</string>
+    <string name="settings_section_protect">Proteger AppLock</string>
+    <string name="settings_protect_uninstall">Pedir mi PIN antes de desinstalar apps</string>
+    <string name="settings_protect_uninstall_hint">Cubre el cuadro de desinstalación desde Ajustes, Google Play y la pantalla de inicio. También lo pide antes de instalar apps desde archivos.</string>
+    <string name="settings_protect_settings">Bloquear también los Ajustes de Android</string>
+    <string name="settings_protect_settings_hint">Evita que alguien desactive AppLock desde los Ajustes antes. Necesitarás tu PIN cada vez que abras Ajustes.</string>
+    <string name="settings_protect_limits">Esto no puede impedir una desinstalación desde un ordenador o en modo seguro, así que mantén también el bloqueo de pantalla del teléfono.</string>
+    <string name="lock_title_installer">Introduce tu PIN para instalar o quitar apps</string>
 </resources>
