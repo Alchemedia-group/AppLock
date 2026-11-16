@@ -4,7 +4,7 @@ APP NAME (max 30): AppLock - Bloqueio de apps   [26 characters]
 
 SHORT DESCRIPTION (max 80): Bloqueia apps com PIN, padrão ou impressão digital. Foto de quem falhar.   [72 characters]
 
-FULL DESCRIPTION (max 4000) [2653 characters]:
+FULL DESCRIPTION (max 4000) [2807 characters]:
 Mantém as tuas apps privadas.
 
 O AppLock coloca um bloqueio com PIN, padrão ou impressão digital à frente das apps que escolheres. Com o AppLock Pro, tira também uma foto a quem falhar o desbloqueio.
@@ -21,6 +21,7 @@ MANTÉM O CONTROLO
 • Código de recuperação: guarda-o durante a configuração e esquecer o PIN ou o padrão deixa de ser o fim da linha
 • Ecrã de falha falso (opcional): as apps bloqueadas parecem ter falhado. Mantém premido «Fechar app» para ver o bloqueio real
 • Notificações ocultas (opcional): as apps bloqueadas mostram «Nova notificação» em vez da mensagem
+• Proteção opcional contra a desinstalação: o PIN é pedido antes de ser possível desinstalar apps e, se quiseres, antes de abrir as Definições do Android
 • Cópia de segurança e restauro da lista de apps bloqueadas e das definições. O PIN e as fotos nunca são incluídos
 • A barra de navegação esconde-se sozinha
 • Disponível em inglês, espanhol, alemão, francês, italiano, português e polaco

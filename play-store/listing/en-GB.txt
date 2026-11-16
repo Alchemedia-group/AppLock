@@ -4,7 +4,7 @@ APP NAME (max 30): AppLock - Lock Any App   [22 characters]
 
 SHORT DESCRIPTION (max 80): Lock apps with a PIN, pattern or fingerprint. Photograph anyone who fails.   [74 characters]
 
-FULL DESCRIPTION (max 4000) [2425 characters]:
+FULL DESCRIPTION (max 4000) [2552 characters]:
 Keep your apps private.
 
 AppLock puts a PIN, pattern or fingerprint lock in front of the apps you choose. With AppLock Pro, it also takes a photo of anyone who fails to unlock.
@@ -21,6 +21,7 @@ STAY IN CONTROL
 • Recovery code: save it during setup, and a forgotten PIN or pattern is not the end of the road
 • Optional fake crash screen: locked apps look like they crashed. Long-press "Close app" to reveal the real lock
 • Optional hidden notifications: locked apps show "New notification" instead of the message
+• Optional uninstall protection: ask for your PIN before apps can be uninstalled, and optionally before Android Settings opens
 • Back up and restore your list of locked apps and settings. Your PIN and photos are never included
 • The navigation bar hides itself for a clean, immersive look
 • Available in English, Spanish, German, French, Italian, Portuguese and Polish

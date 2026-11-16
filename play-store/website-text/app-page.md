@@ -14,6 +14,7 @@ AppLock puts a PIN, pattern or fingerprint lock in front of the apps you choose.
 - **Recovery code.** A one-time code you save during setup, so a forgotten PIN or pattern is not the end of the road.
 - **Fake crash screen (optional).** Locked apps look like they crashed. A long-press on "Close app" reveals the real lock.
 - **Hidden notifications (optional).** Notifications from locked apps show "New notification" instead of the message.
+- **Uninstall protection (optional).** Ask for your PIN before apps can be uninstalled, and optionally before Android Settings opens.
 - **Backup and restore.** Save your list of locked apps and your preferences to a file. Your PIN and photos are never included.
 - **Private screens.** AppLock's own screens are hidden from screenshots and the recent-apps view.
 - **Auto-hiding navigation bar.** Swipe from the screen edge to bring it back.

@@ -4,7 +4,7 @@ APP NAME (max 30): AppLock - Apps sperren   [22 characters]
 
 SHORT DESCRIPTION (max 80): Apps mit PIN, Muster oder Fingerabdruck sperren. Foto von jedem, der scheitert.   [79 characters]
 
-FULL DESCRIPTION (max 4000) [2803 characters]:
+FULL DESCRIPTION (max 4000) [2954 characters]:
 Halte deine Apps privat.
 
 AppLock setzt eine PIN-, Muster- oder Fingerabdrucksperre vor die Apps, die du auswählst. Mit AppLock Pro macht es außerdem ein Foto von jedem, der beim Entsperren scheitert.
@@ -21,6 +21,7 @@ BEHALTE DIE KONTROLLE
 • Wiederherstellungscode: Speichere ihn bei der Einrichtung, dann ist eine vergessene PIN oder ein vergessenes Muster nicht das Ende
 • Optionaler falscher Absturzbildschirm: Gesperrte Apps sehen aus, als wären sie abgestürzt. Zum Entsperren „App schließen“ lange drücken
 • Optional verborgene Benachrichtigungen: Gesperrte Apps zeigen „Neue Benachrichtigung“ statt der Nachricht
+• Optionaler Deinstallationsschutz: Vor dem Deinstallieren von Apps wird deine PIN abgefragt, auf Wunsch auch vor dem Öffnen der Android-Einstellungen
 • Sichere und stelle deine Liste gesperrter Apps und die Einstellungen wieder her. PIN und Fotos sind nie enthalten
 • Die Navigationsleiste blendet sich selbst aus
 • Verfügbar auf Englisch, Spanisch, Deutsch, Französisch, Italienisch, Portugiesisch und Polnisch

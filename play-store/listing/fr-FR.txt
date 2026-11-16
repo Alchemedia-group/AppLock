@@ -4,7 +4,7 @@ APP NAME (max 30): AppLock - Verrouillage d’appli   [30 characters]
 
 SHORT DESCRIPTION (max 80): Verrouille tes applis par code, schéma ou empreinte. Photo de qui échoue.   [73 characters]
 
-FULL DESCRIPTION (max 4000) [2894 characters]:
+FULL DESCRIPTION (max 4000) [3067 characters]:
 Garde tes applis privées.
 
 AppLock place un verrou par code PIN, schéma ou empreinte devant les applis que tu choisis. Avec AppLock Pro, il prend aussi en photo quiconque échoue à déverrouiller.
@@ -21,6 +21,7 @@ GARDE LE CONTRÔLE
 • Code de récupération : enregistre-le lors de la configuration et un code PIN ou un schéma oublié n’est plus une impasse
 • Faux écran de plantage (facultatif) : les applis verrouillées semblent avoir planté. Appuie longuement sur « Fermer l’appli » pour voir le vrai verrou
 • Notifications masquées (facultatif) : les applis verrouillées affichent « Nouvelle notification » au lieu du message
+• Protection facultative contre la désinstallation : ton code PIN est demandé avant de pouvoir désinstaller des applis et, si tu veux, avant d’ouvrir les réglages d’Android
 • Sauvegarde et restauration de ta liste d’applis verrouillées et de tes réglages. Ton code PIN et tes photos ne sont jamais inclus
 • La barre de navigation se masque toute seule
 • Disponible en anglais, espagnol, allemand, français, italien, portugais et polonais
